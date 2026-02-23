@@ -2,17 +2,23 @@ import streamlit as st
 import graphviz
 import pandas as pd
 import re
-import requests
 from datetime import datetime
+from openai import OpenAI
+
+# ============================================
+# CONFIG
+# ============================================
 
 st.set_page_config(layout="wide")
-
 st.title("ICU Intelligent Root Cause Analysis Platform")
-st.caption("Deterministic Classification + AI-Enhanced RCA")
+st.caption("Deterministic Domain Scoring + OpenAI Enhanced RCA")
 
-# =====================================================
+# Initialize OpenAI client
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+
+# ============================================
 # INCIDENT INPUT
-# =====================================================
+# ============================================
 
 st.header("Incident Information")
 
@@ -34,39 +40,53 @@ description = st.text_area("Detailed Incident Description")
 
 st.divider()
 
-# =====================================================
+# ============================================
 # SMART DOMAIN SCORING ENGINE
-# =====================================================
+# ============================================
 
 DOMAIN_RULES = {
     "People / Staff": {
-        "keywords": ["fatigue", "error", "mistake", "calculation",
-                     "incorrect", "wrong", "forgot", "inattention"],
+        "keywords": [
+            "fatigue", "error", "mistake", "calculation",
+            "incorrect", "wrong", "forgot", "inattention",
+            "missed", "dose", "omitted", "insulin",
+            "medication", "drug"
+        ],
         "weight": 2
     },
     "Communication": {
-        "keywords": ["handover", "verbal", "not informed",
-                     "miscommunication", "documentation", "unclear"],
+        "keywords": [
+            "handover", "verbal", "not informed",
+            "miscommunication", "documentation",
+            "unclear", "order"
+        ],
         "weight": 2
     },
     "Policies / Procedures": {
-        "keywords": ["protocol", "guideline", "checklist",
-                     "policy", "deviation", "delay"],
+        "keywords": [
+            "protocol", "guideline", "checklist",
+            "policy", "deviation", "delay"
+        ],
         "weight": 2
     },
     "Equipment / Technology": {
-        "keywords": ["pump", "alarm", "malfunction",
-                     "device", "ventilator", "monitor"],
+        "keywords": [
+            "pump", "alarm", "malfunction",
+            "device", "ventilator", "monitor"
+        ],
         "weight": 2
     },
     "Environment": {
-        "keywords": ["busy", "overcrowded", "noise",
-                     "high workload", "staff shortage"],
+        "keywords": [
+            "busy", "overcrowded", "noise",
+            "high workload", "staff shortage"
+        ],
         "weight": 1
     },
     "Patient Factors": {
-        "keywords": ["complex", "unstable", "non-compliant",
-                     "multiple comorbidities"],
+        "keywords": [
+            "complex", "unstable", "non-compliant"
+        ],
         "weight": 1
     }
 }
@@ -89,51 +109,50 @@ def classify_domains(text):
 
     return detected, scores
 
-# =====================================================
-# HUGGING FACE LLM FUNCTION
-# =====================================================
+# ============================================
+# OPENAI RCA GENERATION
+# ============================================
 
-def generate_llm_summary(text, domains):
+def generate_ai_rca(text, domains):
 
     prompt = f"""
-    Perform a structured ICU Root Cause Analysis.
+You are an ICU quality and safety expert.
 
-    Incident Description:
-    {text}
+Perform a structured Root Cause Analysis.
 
-    Identified Contributing Domains:
-    {domains}
+Incident:
+{text}
 
-    Provide:
-    1. Concise RCA narrative
-    2. Latent system-level root cause
-    3. Recommended improvement strategies
-    """
+Detected contributing domains:
+{domains}
 
-    headers = {
-        "Authorization": f"Bearer {st.secrets['HF_API_KEY']}"
-    }
+Provide:
+1. Concise RCA narrative
+2. Latent system-level root cause
+3. Recommended corrective actions
+4. Preventive strategies
+"""
 
-    API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-large"
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "You are a clinical quality improvement specialist."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.3
+        )
 
-    response = requests.post(
-        API_URL,
-        headers=headers,
-        json={"inputs": prompt}
-    )
+        return response.choices[0].message.content
 
-    result = response.json()
+    except Exception as e:
+        return f"AI generation failed: {str(e)}"
 
-    if isinstance(result, list):
-        return result[0]["generated_text"]
+# ============================================
+# GENERATE RCA
+# ============================================
 
-    return "AI generation failed."
-
-# =====================================================
-# RCA GENERATION
-# =====================================================
-
-if st.button("Generate Intelligent RCA"):
+if st.button("Generate RCA Analysis"):
 
     detected_domains, scores = classify_domains(description)
 
@@ -151,9 +170,9 @@ if st.button("Generate Intelligent RCA"):
     for d in detected_domains:
         st.write(f"- {d}")
 
-    # =====================================================
+    # ============================================
     # FISHBONE
-    # =====================================================
+    # ============================================
 
     st.subheader("Fishbone Diagram")
 
@@ -167,9 +186,9 @@ if st.button("Generate Intelligent RCA"):
 
     st.graphviz_chart(dot)
 
-    # =====================================================
-    # 5 WHYS AUTO STRUCTURE
-    # =====================================================
+    # ============================================
+    # 5 WHYS
+    # ============================================
 
     st.subheader("5 Whys Structured Chain")
 
@@ -178,24 +197,24 @@ if st.button("Generate Intelligent RCA"):
         "Statement": [
             problem_statement,
             f"Because of issues related to {detected_domains[0]}",
-            "Because system safeguards were inadequate",
-            "Because monitoring/audit process failed",
-            "Because latent organizational weakness exists",
-            "Root Cause: System reliability failure"
+            "Because system safeguards were insufficient",
+            "Because monitoring and audit mechanisms failed",
+            "Because organizational learning gap exists",
+            "Root Cause: System reliability weakness"
         ]
     })
 
     st.table(why_df)
 
-    # =====================================================
-    # OPTIONAL AI ENHANCEMENT
-    # =====================================================
+    # ============================================
+    # AI ENHANCED RCA
+    # ============================================
 
-    if st.checkbox("Enhance with AI Narrative"):
+    if st.checkbox("Enhance with OpenAI Narrative"):
 
-        st.subheader("AI-Enhanced RCA Narrative")
+        st.subheader("AI-Enhanced RCA")
 
-        llm_output = generate_llm_summary(description, detected_domains)
-        st.write(llm_output)
+        ai_output = generate_ai_rca(description, detected_domains)
+        st.write(ai_output)
 
-    st.success("RCA Completed")
+    st.success("RCA Completed Successfully")
