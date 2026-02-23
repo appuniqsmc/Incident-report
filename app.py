@@ -198,15 +198,17 @@ if st.button("Run RCA Analysis"):
     st.subheader("Driver Diagram")
     st.graphviz_chart(draw_driver_diagram(domains))
 
-    # Predict severity probability
-    input_row = df.iloc[0].copy()
+    # Proper 2D input fix
+    input_row = df.iloc[0][features].copy()
 
     input_row["human_factor"] = domains["human_factor"]
     input_row["communication_issue"] = domains["communication_issue"]
     input_row["protocol_issue"] = domains["protocol_issue"]
     input_row["equipment_issue"] = domains["equipment_issue"]
 
-    prob = model.predict_proba([input_row[features]])[0][1]
+    input_df = pd.DataFrame([input_row])
+
+    prob = model.predict_proba(input_df)[0][1]
 
     st.subheader("Predicted Severe Probability")
     st.write(f"{prob:.3f}")
