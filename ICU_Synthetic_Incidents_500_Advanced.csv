@@ -1,0 +1,501 @@
+incident_id,date,month,shift,incident_type,staffing_ratio,avg_experience_years,workload_index,bed_occupancy_rate,checklist_compliance,training_compliance,equipment_maintenance_score,human_factor,communication_issue,protocol_issue,equipment_issue,severity_label,severity_binary
+ICU_0001,2025-01-27,1,Morning,Diagnostic Delay,2.07,5.5,0.73,0.98,0.86,0.65,0.99,0,1,0,0,Severe,1
+ICU_0002,2025-06-24,6,Morning,Medication Error,2.42,7.0,0.89,0.87,0.86,0.66,0.62,1,0,0,1,Moderate,0
+ICU_0003,2025-11-02,11,Morning,Equipment Malfunction,3.1,3.0,0.68,0.79,0.77,0.72,0.85,1,0,1,1,Severe,1
+ICU_0004,2025-01-11,1,Evening,Diagnostic Delay,2.69,5.1,1.11,1.06,0.66,0.62,0.69,0,1,0,0,Sentinel,1
+ICU_0005,2025-04-16,4,Night,Blood Transfusion Reaction,2.86,1.9,0.59,0.92,0.72,0.7,0.77,0,0,0,0,Mild,0
+ICU_0006,2025-12-17,12,Night,Pressure Injury,2.22,1.3,1.39,1.17,0.75,0.77,0.65,0,0,0,0,Severe,1
+ICU_0007,2025-11-27,11,Night,Central Line Issue,2.18,1.4,1.37,0.83,0.74,0.99,0.81,0,0,0,1,Severe,1
+ICU_0008,2025-02-07,2,Evening,Fall,2.13,4.4,1.33,1.0,0.77,0.61,0.72,0,0,1,1,Severe,1
+ICU_0009,2025-06-30,6,Evening,Sepsis Delay,3.2,2.8,1.38,0.96,0.83,0.75,0.85,0,0,0,0,Moderate,0
+ICU_0010,2025-11-19,11,Night,Sepsis Delay,2.87,4.7,0.58,1.08,0.62,0.52,0.83,0,1,0,0,Near Miss,0
+ICU_0011,2025-03-10,3,Morning,Fall,3.07,5.2,0.52,1.0,0.78,0.5,0.66,1,0,0,0,Severe,1
+ICU_0012,2025-11-13,11,Night,Ventilator Event,2.07,5.7,1.19,0.98,0.69,0.96,0.94,0,1,0,1,Severe,1
+ICU_0013,2025-12-22,12,Morning,Equipment Malfunction,2.34,3.8,0.8,0.9,0.85,1.0,0.74,0,1,0,0,Severe,1
+ICU_0014,2025-11-24,11,Evening,Central Line Issue,2.7,6.2,1.19,0.78,0.7,0.54,0.74,1,0,1,0,Sentinel,1
+ICU_0015,2025-11-18,11,Night,Medication Error,3.33,4.2,0.61,0.77,0.66,0.8,0.94,0,1,0,0,Sentinel,1
+ICU_0016,2025-07-08,7,Night,Central Line Issue,2.96,4.3,0.88,0.86,0.68,0.5,0.93,0,0,0,0,Severe,1
+ICU_0017,2025-03-11,3,Night,Fall,2.76,1.0,1.08,0.96,0.5,0.99,0.96,1,0,0,0,Mild,0
+ICU_0018,2025-08-08,8,Morning,Medication Error,2.23,2.6,1.02,1.15,0.99,0.55,0.83,0,0,0,1,Severe,1
+ICU_0019,2025-07-08,7,Night,Sepsis Delay,2.33,5.9,1.23,0.78,0.8,0.92,0.99,1,1,0,0,Severe,1
+ICU_0020,2025-09-14,9,Morning,Ventilator Event,2.45,2.8,0.7,0.93,0.77,0.46,0.72,0,0,0,1,Severe,1
+ICU_0021,2025-11-04,11,Morning,Handover Communication,2.55,5.1,0.96,1.08,0.87,0.43,0.88,0,0,0,0,Moderate,0
+ICU_0022,2025-09-05,9,Night,Fall,2.38,4.5,1.28,0.84,0.65,0.8,0.64,0,1,0,0,Mild,0
+ICU_0023,2025-04-25,4,Morning,Pressure Injury,2.8,4.5,1.2,0.92,0.72,0.86,0.83,0,1,0,0,Mild,0
+ICU_0024,2025-10-27,10,Night,Ventilator Event,2.56,2.8,1.31,0.87,0.96,0.85,0.83,1,0,0,0,Severe,1
+ICU_0025,2025-08-18,8,Morning,Handover Communication,2.4,4.2,1.36,1.11,0.95,0.48,0.63,0,1,0,1,Severe,1
+ICU_0026,2025-03-31,3,Evening,Pressure Injury,2.39,2.5,0.92,0.98,0.56,0.52,0.92,0,0,1,0,Mild,0
+ICU_0027,2025-07-14,7,Night,Medication Error,3.05,3.8,0.51,0.98,0.97,0.75,0.68,0,1,0,0,Severe,1
+ICU_0028,2025-05-17,5,Night,Fall,2.18,6.2,1.17,0.71,0.82,0.42,0.9,0,1,0,0,Near Miss,0
+ICU_0029,2025-01-25,1,Morning,Central Line Issue,2.08,3.9,1.04,0.73,0.83,1.0,0.91,1,0,0,0,Sentinel,1
+ICU_0030,2025-03-14,3,Evening,Handover Communication,2.14,4.3,1.2,1.03,0.52,0.88,0.81,0,1,0,0,Moderate,0
+ICU_0031,2025-05-28,5,Morning,Blood Transfusion Reaction,3.06,3.5,0.91,0.94,0.59,0.59,0.94,0,0,0,1,Severe,1
+ICU_0032,2025-08-02,8,Evening,Handover Communication,2.37,2.1,1.49,0.82,0.96,0.95,0.64,1,1,0,1,Severe,1
+ICU_0033,2025-09-29,9,Evening,Sepsis Delay,2.58,-0.8,0.81,0.72,0.62,0.46,0.7,0,0,1,0,Severe,1
+ICU_0034,2025-10-13,10,Morning,Diagnostic Delay,2.48,3.8,1.48,0.97,0.81,0.4,0.79,0,0,0,0,Mild,0
+ICU_0035,2025-01-31,1,Evening,Blood Transfusion Reaction,2.47,2.6,1.46,0.87,0.9,0.88,0.68,0,0,0,0,Severe,1
+ICU_0036,2025-05-04,5,Morning,Medication Error,3.2,3.3,0.91,0.8,0.98,0.79,0.95,0,1,0,1,Severe,1
+ICU_0037,2025-01-22,1,Night,Sepsis Delay,2.2,4.0,1.49,0.82,0.69,0.53,0.64,0,0,0,0,Severe,1
+ICU_0038,2025-11-26,11,Morning,Handover Communication,2.2,2.5,1.13,0.84,0.68,0.4,0.75,0,0,0,0,Severe,1
+ICU_0039,2025-08-11,8,Night,Equipment Malfunction,2.01,4.2,1.1,0.85,0.82,0.42,0.96,1,1,0,0,Severe,1
+ICU_0040,2025-02-24,2,Morning,Central Line Issue,2.66,5.0,1.46,0.91,0.94,0.61,0.97,0,0,0,1,Severe,1
+ICU_0041,2025-04-20,4,Morning,Equipment Malfunction,2.62,4.4,0.62,1.0,0.51,0.83,0.6,1,0,0,0,Severe,1
+ICU_0042,2025-12-09,12,Evening,Sepsis Delay,2.47,3.8,1.38,0.88,0.77,0.74,0.69,1,1,0,0,Sentinel,1
+ICU_0043,2025-02-14,2,Morning,Handover Communication,3.25,5.3,0.8,0.91,0.73,0.96,0.83,1,1,0,1,Severe,1
+ICU_0044,2025-02-28,2,Night,Fall,2.53,4.9,1.0,0.7,0.74,0.96,0.68,1,0,0,0,Moderate,0
+ICU_0045,2025-05-01,5,Evening,Equipment Malfunction,2.45,3.1,0.87,1.13,0.51,0.95,0.87,0,1,1,0,Sentinel,1
+ICU_0046,2025-02-01,2,Night,Medication Error,2.59,5.2,1.31,0.87,0.67,0.63,0.9,1,0,1,1,Sentinel,1
+ICU_0047,2025-11-06,11,Evening,Pressure Injury,1.97,3.0,1.44,1.15,0.67,0.78,0.71,0,0,0,0,Severe,1
+ICU_0048,2025-01-18,1,Evening,Blood Transfusion Reaction,2.25,2.3,0.83,1.14,0.91,0.83,0.98,0,0,1,0,Mild,0
+ICU_0049,2025-02-10,2,Night,Equipment Malfunction,1.89,3.3,0.62,0.85,0.57,0.46,0.84,1,1,0,0,Mild,0
+ICU_0050,2025-07-24,7,Morning,Ventilator Event,2.88,1.0,0.69,1.04,0.61,0.57,0.9,1,1,0,0,Moderate,0
+ICU_0051,2025-03-25,3,Morning,Equipment Malfunction,1.73,5.0,1.04,1.05,0.96,0.75,0.69,1,1,0,0,Severe,1
+ICU_0052,2025-04-05,4,Morning,Ventilator Event,2.83,5.1,0.7,1.11,0.73,0.87,0.69,0,0,0,0,Severe,1
+ICU_0053,2025-05-11,5,Morning,Handover Communication,2.64,3.8,1.16,1.09,0.84,0.52,0.79,1,1,1,0,Severe,1
+ICU_0054,2025-03-03,3,Evening,Handover Communication,2.73,5.5,0.51,0.74,0.67,0.97,0.8,0,0,0,0,Near Miss,0
+ICU_0055,2025-02-17,2,Night,Ventilator Event,2.17,2.0,0.71,0.91,0.61,0.91,0.78,1,0,0,0,Mild,0
+ICU_0056,2025-12-12,12,Morning,Central Line Issue,2.62,3.8,0.81,1.15,0.52,0.82,0.79,0,0,1,1,Sentinel,1
+ICU_0057,2025-02-12,2,Night,Central Line Issue,2.29,3.9,0.54,0.87,0.97,0.77,0.75,0,1,0,0,Severe,1
+ICU_0058,2025-10-19,10,Evening,Equipment Malfunction,1.99,4.7,0.67,0.88,0.93,0.71,0.72,0,0,0,1,Severe,1
+ICU_0059,2025-12-05,12,Morning,Handover Communication,2.49,4.3,1.16,0.9,0.63,0.45,0.71,0,1,0,1,Severe,1
+ICU_0060,2025-02-03,2,Morning,Central Line Issue,2.23,1.7,0.68,1.18,0.55,0.78,0.78,0,0,0,1,Severe,1
+ICU_0061,2025-10-19,10,Night,Equipment Malfunction,1.74,2.3,1.37,0.84,0.51,0.95,0.95,0,1,0,0,Severe,1
+ICU_0062,2025-10-01,10,Night,Diagnostic Delay,2.57,1.3,0.61,0.75,0.92,0.65,0.86,1,0,1,0,Sentinel,1
+ICU_0063,2025-07-30,7,Night,Fall,2.67,4.3,0.97,0.89,0.77,0.92,0.86,0,0,0,0,Severe,1
+ICU_0064,2025-02-14,2,Morning,Medication Error,2.8,2.9,0.63,0.78,0.81,0.54,0.88,1,0,1,0,Severe,1
+ICU_0065,2025-08-04,8,Evening,Diagnostic Delay,1.98,2.7,1.5,0.72,0.82,0.42,0.9,0,1,0,0,Sentinel,1
+ICU_0066,2025-01-02,1,Night,Blood Transfusion Reaction,2.41,3.8,1.15,1.07,0.84,0.43,0.72,0,0,0,0,Sentinel,1
+ICU_0067,2025-05-07,5,Evening,Pressure Injury,1.79,3.4,1.31,0.77,0.81,0.99,0.96,1,1,0,0,Sentinel,1
+ICU_0068,2025-10-16,10,Night,Blood Transfusion Reaction,2.44,5.2,1.24,0.81,0.7,0.91,0.65,0,1,1,0,Severe,1
+ICU_0069,2025-07-10,7,Night,Equipment Malfunction,2.5,5.5,0.93,0.85,0.96,0.71,0.92,1,1,0,1,Sentinel,1
+ICU_0070,2025-09-17,9,Evening,Ventilator Event,2.08,2.1,1.1,0.92,0.97,0.64,0.79,0,0,0,0,Severe,1
+ICU_0071,2025-11-06,11,Night,Equipment Malfunction,1.95,6.5,1.49,0.75,0.61,0.59,0.66,0,1,0,1,Sentinel,1
+ICU_0072,2025-12-20,12,Night,Pressure Injury,2.87,2.9,1.02,0.72,0.99,0.77,0.62,0,0,1,1,Severe,1
+ICU_0073,2025-07-24,7,Night,Central Line Issue,2.04,6.3,0.64,0.98,0.86,0.8,0.7,0,0,0,0,Mild,0
+ICU_0074,2025-08-29,8,Evening,Central Line Issue,3.54,6.6,1.22,0.88,0.9,0.78,0.62,0,0,0,1,Sentinel,1
+ICU_0075,2025-08-30,8,Evening,Equipment Malfunction,2.95,4.2,1.07,0.79,0.76,0.85,0.64,1,0,0,1,Severe,1
+ICU_0076,2025-02-27,2,Night,Medication Error,2.33,4.6,1.03,0.89,0.62,0.79,0.61,0,0,0,0,Mild,0
+ICU_0077,2025-10-15,10,Night,Fall,2.57,6.4,1.38,0.96,0.52,0.49,0.92,0,0,1,0,Severe,1
+ICU_0078,2025-04-14,4,Evening,Fall,1.34,3.4,0.82,0.84,0.98,0.66,0.95,0,1,0,0,Sentinel,1
+ICU_0079,2025-10-06,10,Night,Diagnostic Delay,2.87,4.6,1.35,1.18,0.85,0.88,0.89,1,1,1,0,Near Miss,0
+ICU_0080,2025-09-06,9,Evening,Pressure Injury,3.11,5.1,1.22,0.72,0.76,0.88,0.7,0,0,0,1,Severe,1
+ICU_0081,2025-09-08,9,Evening,Ventilator Event,1.52,2.0,0.9,0.76,0.76,0.67,0.87,1,0,0,0,Severe,1
+ICU_0082,2025-03-31,3,Morning,Sepsis Delay,2.32,4.1,0.53,1.05,0.85,0.98,0.95,0,0,0,0,Mild,0
+ICU_0083,2025-08-18,8,Evening,Medication Error,3.4,3.1,0.96,0.81,0.69,0.46,0.87,1,0,0,0,Moderate,0
+ICU_0084,2025-07-08,7,Morning,Handover Communication,2.46,1.9,1.47,0.72,0.58,0.58,0.98,1,1,1,0,Sentinel,1
+ICU_0085,2025-05-27,5,Night,Handover Communication,2.8,4.1,1.38,0.9,0.83,0.79,0.73,1,0,0,1,Severe,1
+ICU_0086,2025-08-30,8,Morning,Central Line Issue,2.45,2.0,0.76,0.88,0.98,0.68,0.87,0,0,0,0,Near Miss,0
+ICU_0087,2025-08-26,8,Evening,Fall,2.06,4.9,0.6,1.17,0.97,0.77,0.61,0,0,0,0,Near Miss,0
+ICU_0088,2025-11-30,11,Evening,Equipment Malfunction,2.77,3.1,1.38,0.93,0.68,0.56,0.65,0,0,0,0,Mild,0
+ICU_0089,2025-03-08,3,Morning,Sepsis Delay,2.32,4.6,0.71,1.03,0.88,0.89,0.67,1,0,0,0,Severe,1
+ICU_0090,2025-05-29,5,Night,Central Line Issue,3.16,6.5,1.47,1.03,0.79,0.71,0.91,1,0,0,0,Severe,1
+ICU_0091,2025-07-08,7,Night,Fall,2.5,4.9,0.83,0.88,0.9,0.63,0.91,0,1,1,0,Sentinel,1
+ICU_0092,2025-06-05,6,Morning,Equipment Malfunction,2.97,3.7,0.58,0.94,0.73,0.56,0.98,1,1,1,0,Severe,1
+ICU_0093,2025-01-26,1,Morning,Diagnostic Delay,2.45,5.3,0.6,0.8,0.64,0.69,0.74,0,1,1,0,Severe,1
+ICU_0094,2025-01-21,1,Morning,Ventilator Event,2.45,6.3,1.37,1.2,0.61,0.77,0.94,1,1,1,0,Sentinel,1
+ICU_0095,2025-09-26,9,Night,Medication Error,2.46,4.3,1.23,0.71,0.94,0.44,0.89,0,0,0,1,Near Miss,0
+ICU_0096,2025-03-07,3,Evening,Blood Transfusion Reaction,2.5,4.3,0.71,1.0,0.81,0.8,0.67,0,0,0,0,Severe,1
+ICU_0097,2025-10-19,10,Morning,Central Line Issue,2.6,5.2,0.54,1.04,0.6,0.42,0.82,0,0,0,0,Mild,0
+ICU_0098,2025-04-12,4,Night,Central Line Issue,2.63,4.4,0.6,1.03,0.86,0.58,0.99,1,0,0,1,Sentinel,1
+ICU_0099,2025-09-13,9,Morning,Equipment Malfunction,2.37,3.7,1.02,1.05,0.62,0.6,0.83,0,0,0,0,Moderate,0
+ICU_0100,2025-05-18,5,Night,Diagnostic Delay,2.63,4.7,0.71,0.83,0.76,0.86,0.85,0,1,1,0,Severe,1
+ICU_0101,2025-02-16,2,Night,Equipment Malfunction,3.52,4.1,1.26,0.97,0.95,0.97,0.97,1,0,1,0,Severe,1
+ICU_0102,2025-02-19,2,Night,Fall,2.18,5.2,0.89,0.84,0.83,0.59,0.9,1,1,1,0,Sentinel,1
+ICU_0103,2025-03-01,3,Evening,Fall,2.61,3.4,1.09,1.12,0.72,0.77,0.82,0,0,1,0,Moderate,0
+ICU_0104,2025-05-17,5,Night,Blood Transfusion Reaction,1.99,4.3,1.4,0.8,0.83,0.96,0.69,1,1,0,0,Severe,1
+ICU_0105,2025-04-02,4,Morning,Sepsis Delay,2.71,3.4,1.33,0.88,0.63,0.48,1.0,0,1,0,0,Mild,0
+ICU_0106,2025-05-05,5,Evening,Equipment Malfunction,2.09,4.1,0.55,0.87,0.96,0.97,0.94,0,1,0,0,Mild,0
+ICU_0107,2025-12-26,12,Night,Equipment Malfunction,2.39,2.3,0.75,0.8,0.84,0.69,0.73,0,0,1,0,Near Miss,0
+ICU_0108,2025-11-03,11,Evening,Handover Communication,2.54,2.6,0.85,0.9,0.66,0.63,0.82,0,0,0,1,Severe,1
+ICU_0109,2025-12-09,12,Morning,Medication Error,2.54,5.2,0.77,1.2,0.69,0.82,0.88,1,1,0,0,Severe,1
+ICU_0110,2025-03-23,3,Night,Sepsis Delay,1.96,3.6,1.47,0.73,0.74,0.53,0.72,1,0,0,0,Severe,1
+ICU_0111,2025-05-13,5,Morning,Handover Communication,2.32,5.6,0.58,0.8,0.93,0.99,0.71,1,0,0,0,Moderate,0
+ICU_0112,2025-03-27,3,Evening,Equipment Malfunction,2.27,4.4,1.22,0.91,0.96,0.59,0.98,0,0,0,0,Severe,1
+ICU_0113,2025-08-08,8,Morning,Sepsis Delay,1.63,4.1,1.15,0.82,0.61,0.52,0.98,0,1,0,0,Mild,0
+ICU_0114,2025-03-09,3,Morning,Sepsis Delay,3.16,3.9,0.97,0.99,0.79,0.99,0.87,1,0,1,0,Severe,1
+ICU_0115,2025-05-30,5,Evening,Sepsis Delay,2.41,1.8,0.89,1.11,0.89,0.45,0.98,0,0,0,0,Severe,1
+ICU_0116,2025-12-06,12,Morning,Pressure Injury,3.48,5.0,0.91,1.02,0.94,0.8,0.99,0,0,0,0,Mild,0
+ICU_0117,2025-03-06,3,Morning,Sepsis Delay,2.86,4.8,0.55,1.04,0.83,0.46,0.94,1,0,1,0,Sentinel,1
+ICU_0118,2025-12-31,12,Evening,Medication Error,2.17,4.3,1.09,0.94,0.62,0.41,0.75,0,0,1,0,Moderate,0
+ICU_0119,2025-06-23,6,Morning,Ventilator Event,1.89,5.6,0.81,1.08,0.88,0.83,0.64,0,0,0,0,Near Miss,0
+ICU_0120,2025-10-29,10,Morning,Diagnostic Delay,3.62,5.2,1.24,1.15,0.68,0.66,0.89,0,1,0,0,Sentinel,1
+ICU_0121,2025-09-06,9,Night,Handover Communication,2.78,6.9,0.85,0.8,0.59,0.45,0.63,0,1,0,1,Severe,1
+ICU_0122,2025-01-26,1,Evening,Handover Communication,2.36,5.6,0.56,1.15,0.61,0.56,0.68,0,0,1,1,Severe,1
+ICU_0123,2025-11-11,11,Evening,Central Line Issue,2.62,4.2,1.17,1.13,0.62,0.8,0.88,1,1,0,0,Sentinel,1
+ICU_0124,2025-02-02,2,Night,Blood Transfusion Reaction,2.93,3.8,1.19,1.15,0.88,0.71,0.8,0,1,0,1,Severe,1
+ICU_0125,2025-06-22,6,Night,Sepsis Delay,2.34,3.9,1.04,0.91,0.58,0.47,0.78,0,0,0,0,Sentinel,1
+ICU_0126,2025-12-21,12,Night,Central Line Issue,1.92,1.8,0.55,0.91,0.51,0.42,0.74,0,1,1,0,Severe,1
+ICU_0127,2025-08-12,8,Evening,Handover Communication,2.43,6.0,0.51,0.78,0.87,0.84,0.9,0,0,1,1,Near Miss,0
+ICU_0128,2025-02-02,2,Night,Central Line Issue,1.97,2.0,1.3,0.9,0.86,0.75,0.75,0,1,0,0,Sentinel,1
+ICU_0129,2025-08-15,8,Morning,Medication Error,2.45,5.5,1.49,0.88,0.62,0.61,0.74,1,1,0,1,Sentinel,1
+ICU_0130,2025-09-03,9,Night,Blood Transfusion Reaction,2.31,6.2,0.93,0.94,0.72,0.7,0.74,0,1,1,1,Sentinel,1
+ICU_0131,2025-12-05,12,Morning,Ventilator Event,1.61,2.4,1.02,1.01,0.62,0.71,0.84,0,0,1,0,Severe,1
+ICU_0132,2025-02-13,2,Night,Diagnostic Delay,2.51,3.5,0.74,0.9,0.91,0.6,0.79,0,1,1,0,Moderate,0
+ICU_0133,2025-03-01,3,Night,Sepsis Delay,1.94,5.6,0.71,0.85,0.98,0.45,0.79,0,1,1,0,Sentinel,1
+ICU_0134,2025-12-21,12,Night,Pressure Injury,2.52,3.0,0.65,1.02,0.63,0.81,0.74,0,0,0,0,Mild,0
+ICU_0135,2025-10-12,10,Evening,Equipment Malfunction,2.5,2.7,0.79,1.02,0.75,0.42,0.73,1,0,1,1,Mild,0
+ICU_0136,2025-09-25,9,Night,Pressure Injury,3.6,3.4,0.6,1.02,0.67,0.51,0.92,0,0,0,0,Sentinel,1
+ICU_0137,2025-03-08,3,Morning,Blood Transfusion Reaction,2.41,6.8,0.51,0.9,0.82,0.92,0.85,0,0,0,0,Sentinel,1
+ICU_0138,2025-08-17,8,Morning,Medication Error,2.06,0.8,1.37,0.88,0.53,0.67,1.0,1,0,1,0,Severe,1
+ICU_0139,2025-03-04,3,Evening,Central Line Issue,2.02,3.3,0.55,0.79,0.66,0.74,0.87,0,0,0,0,Mild,0
+ICU_0140,2025-10-01,10,Evening,Pressure Injury,2.27,3.4,1.03,1.04,0.65,0.8,0.72,0,0,0,0,Severe,1
+ICU_0141,2025-04-25,4,Evening,Fall,2.31,5.6,1.24,0.72,0.6,0.44,0.67,1,0,0,0,Severe,1
+ICU_0142,2025-06-15,6,Night,Pressure Injury,2.43,0.4,1.42,1.01,0.85,0.45,0.71,0,1,0,0,Moderate,0
+ICU_0143,2025-02-25,2,Night,Fall,2.51,4.3,1.29,0.72,0.54,0.47,0.61,1,0,0,0,Moderate,0
+ICU_0144,2025-03-04,3,Morning,Diagnostic Delay,2.44,4.4,1.5,1.07,0.63,1.0,0.95,0,1,0,0,Mild,0
+ICU_0145,2025-06-11,6,Evening,Equipment Malfunction,2.34,3.4,1.18,0.74,0.79,0.44,0.69,1,0,0,0,Mild,0
+ICU_0146,2025-08-06,8,Evening,Medication Error,2.5,5.0,1.07,0.83,0.72,0.48,0.81,0,1,0,0,Severe,1
+ICU_0147,2025-12-14,12,Night,Central Line Issue,2.35,4.2,1.02,0.83,0.59,0.74,0.72,0,1,0,0,Sentinel,1
+ICU_0148,2025-08-03,8,Morning,Fall,2.05,3.8,0.63,0.75,0.54,0.73,0.9,1,0,1,0,Severe,1
+ICU_0149,2025-06-01,6,Evening,Diagnostic Delay,2.43,3.8,0.97,1.13,0.88,0.73,0.66,0,0,0,1,Mild,0
+ICU_0150,2025-01-01,1,Evening,Medication Error,3.11,2.9,0.87,0.72,0.79,0.83,0.89,0,0,0,0,Mild,0
+ICU_0151,2025-10-22,10,Morning,Ventilator Event,2.31,2.5,0.91,0.91,0.56,0.63,0.8,0,0,1,0,Severe,1
+ICU_0152,2025-10-11,10,Night,Pressure Injury,2.73,6.6,0.9,1.16,0.8,0.98,0.95,0,1,0,0,Mild,0
+ICU_0153,2025-09-27,9,Evening,Pressure Injury,2.77,4.4,1.49,0.81,0.85,0.95,0.61,1,0,0,1,Sentinel,1
+ICU_0154,2025-05-12,5,Night,Sepsis Delay,2.58,5.1,0.66,0.72,0.91,0.48,0.98,0,0,0,0,Near Miss,0
+ICU_0155,2025-05-30,5,Evening,Central Line Issue,2.91,3.7,1.27,1.13,0.74,0.83,0.73,1,0,0,0,Mild,0
+ICU_0156,2025-05-25,5,Morning,Central Line Issue,2.34,4.0,0.51,1.04,0.55,0.44,0.8,0,0,0,0,Severe,1
+ICU_0157,2025-12-10,12,Morning,Medication Error,2.23,3.5,0.57,0.8,0.55,0.4,0.71,0,0,0,1,Moderate,0
+ICU_0158,2025-11-02,11,Evening,Fall,2.92,3.3,0.8,1.06,0.86,0.42,0.98,1,0,1,0,Severe,1
+ICU_0159,2025-04-08,4,Morning,Sepsis Delay,2.67,2.9,0.88,1.13,1.0,0.52,0.93,1,0,0,0,Sentinel,1
+ICU_0160,2025-03-30,3,Evening,Diagnostic Delay,2.71,4.0,1.16,1.0,0.61,0.83,0.72,1,0,0,0,Severe,1
+ICU_0161,2025-08-11,8,Morning,Ventilator Event,2.43,0.6,1.42,1.09,0.62,0.46,0.94,1,0,0,0,Severe,1
+ICU_0162,2025-06-08,6,Evening,Fall,2.75,4.6,0.88,0.95,0.73,0.59,0.73,0,0,0,0,Mild,0
+ICU_0163,2025-07-05,7,Night,Sepsis Delay,2.88,5.2,1.36,1.12,0.88,0.6,0.88,1,0,1,0,Severe,1
+ICU_0164,2025-02-21,2,Evening,Sepsis Delay,1.98,4.8,0.75,1.12,0.88,0.6,0.81,0,0,1,1,Severe,1
+ICU_0165,2025-10-09,10,Evening,Medication Error,2.62,4.8,1.03,0.73,0.71,0.63,0.67,1,0,0,0,Severe,1
+ICU_0166,2025-05-13,5,Night,Ventilator Event,2.37,3.5,1.1,0.76,0.62,0.97,0.69,1,0,0,0,Mild,0
+ICU_0167,2025-01-23,1,Evening,Central Line Issue,2.71,6.1,0.91,1.0,0.57,0.69,0.99,1,1,0,0,Sentinel,1
+ICU_0168,2025-04-21,4,Evening,Blood Transfusion Reaction,1.89,3.4,1.43,1.01,0.86,0.73,0.6,0,1,1,0,Severe,1
+ICU_0169,2025-06-23,6,Night,Diagnostic Delay,2.85,4.9,1.35,1.2,0.64,0.67,0.82,0,1,1,0,Severe,1
+ICU_0170,2025-10-09,10,Night,Handover Communication,2.47,2.2,0.78,1.12,0.67,0.45,0.6,0,1,0,0,Sentinel,1
+ICU_0171,2025-06-17,6,Morning,Diagnostic Delay,1.97,1.1,1.36,0.83,0.65,0.84,0.67,0,1,0,0,Sentinel,1
+ICU_0172,2025-10-15,10,Morning,Blood Transfusion Reaction,3.04,5.1,0.68,0.81,0.85,0.88,0.98,0,0,0,0,Mild,0
+ICU_0173,2025-07-02,7,Evening,Fall,2.69,1.2,0.65,0.92,0.63,0.61,0.92,0,0,0,0,Mild,0
+ICU_0174,2025-05-30,5,Morning,Fall,2.75,5.4,0.62,0.84,0.97,0.67,0.85,0,1,1,0,Severe,1
+ICU_0175,2025-07-04,7,Night,Ventilator Event,2.51,3.4,1.19,0.73,0.56,0.62,0.98,0,0,0,0,Mild,0
+ICU_0176,2025-08-10,8,Night,Medication Error,2.66,4.5,1.04,1.15,0.59,0.56,0.61,0,0,0,0,Severe,1
+ICU_0177,2025-03-23,3,Morning,Central Line Issue,2.88,4.3,1.11,0.74,0.85,0.81,0.67,0,1,0,0,Near Miss,0
+ICU_0178,2025-01-19,1,Night,Pressure Injury,1.87,2.7,1.07,1.19,0.86,0.87,0.91,0,1,0,0,Severe,1
+ICU_0179,2025-05-02,5,Morning,Pressure Injury,2.15,2.9,0.74,0.81,0.6,0.96,0.98,0,0,1,0,Severe,1
+ICU_0180,2025-11-11,11,Evening,Ventilator Event,2.58,5.7,0.71,0.93,0.54,0.99,0.66,1,0,0,0,Severe,1
+ICU_0181,2025-04-27,4,Night,Ventilator Event,2.3,4.4,1.09,0.76,0.93,0.8,0.98,1,0,0,0,Sentinel,1
+ICU_0182,2025-02-12,2,Night,Diagnostic Delay,2.44,2.3,1.04,0.75,0.84,0.74,0.74,1,0,0,0,Severe,1
+ICU_0183,2025-08-04,8,Night,Fall,3.03,3.4,0.86,1.19,0.96,0.45,0.94,0,1,0,0,Severe,1
+ICU_0184,2025-03-10,3,Morning,Handover Communication,2.34,4.2,1.46,1.12,0.92,0.95,0.97,0,0,0,0,Severe,1
+ICU_0185,2025-10-03,10,Evening,Handover Communication,3.0,3.8,0.77,1.08,0.9,0.45,0.97,0,0,0,0,Near Miss,0
+ICU_0186,2025-07-28,7,Night,Equipment Malfunction,2.65,5.8,1.21,0.87,0.74,0.49,0.8,0,1,0,0,Mild,0
+ICU_0187,2025-04-26,4,Evening,Blood Transfusion Reaction,2.62,6.2,0.63,1.11,0.87,0.42,0.92,0,0,1,0,Moderate,0
+ICU_0188,2025-12-29,12,Evening,Pressure Injury,2.52,5.7,0.88,0.74,0.91,0.4,0.74,0,0,0,0,Mild,0
+ICU_0189,2025-04-05,4,Evening,Fall,2.75,3.6,0.95,1.14,0.54,0.91,0.84,1,0,0,0,Severe,1
+ICU_0190,2025-05-24,5,Night,Central Line Issue,1.74,4.6,0.99,0.84,0.73,0.86,0.85,0,0,1,0,Sentinel,1
+ICU_0191,2025-09-22,9,Night,Sepsis Delay,2.78,4.5,0.55,0.8,0.86,0.64,0.86,0,0,0,0,Near Miss,0
+ICU_0192,2025-05-13,5,Evening,Central Line Issue,2.61,4.7,1.43,0.78,0.88,0.82,0.6,1,0,0,1,Severe,1
+ICU_0193,2025-01-28,1,Morning,Sepsis Delay,3.11,4.2,0.91,0.7,0.59,0.97,0.7,0,0,0,0,Severe,1
+ICU_0194,2025-01-28,1,Night,Medication Error,2.35,5.5,1.02,0.94,0.57,0.62,1.0,0,1,0,0,Mild,0
+ICU_0195,2025-06-23,6,Night,Equipment Malfunction,1.97,7.7,1.05,0.83,0.78,0.84,0.64,0,0,1,0,Severe,1
+ICU_0196,2025-05-10,5,Morning,Equipment Malfunction,2.14,3.0,1.24,1.17,0.71,0.78,0.61,1,0,0,1,Severe,1
+ICU_0197,2025-07-31,7,Night,Fall,2.38,2.5,1.16,1.02,0.6,0.48,0.98,1,0,0,0,Near Miss,0
+ICU_0198,2025-07-07,7,Morning,Pressure Injury,2.27,0.8,0.6,1.16,0.83,0.71,0.77,1,0,0,1,Mild,0
+ICU_0199,2025-03-18,3,Morning,Medication Error,2.64,5.5,0.69,0.79,0.68,0.77,0.82,0,1,0,1,Moderate,0
+ICU_0200,2025-10-02,10,Morning,Pressure Injury,2.94,4.1,1.36,1.12,0.85,0.64,0.71,1,0,0,1,Severe,1
+ICU_0201,2025-04-24,4,Morning,Blood Transfusion Reaction,2.92,4.5,0.77,1.19,0.94,0.52,0.71,0,0,0,0,Sentinel,1
+ICU_0202,2025-05-04,5,Night,Ventilator Event,2.67,2.2,0.65,0.99,0.79,0.76,0.7,0,0,0,0,Sentinel,1
+ICU_0203,2025-11-24,11,Evening,Pressure Injury,2.77,3.4,0.79,0.87,0.89,0.48,0.62,0,0,0,1,Severe,1
+ICU_0204,2025-09-30,9,Night,Handover Communication,2.11,3.6,0.58,0.99,0.59,0.58,0.89,0,1,0,0,Sentinel,1
+ICU_0205,2025-01-16,1,Night,Equipment Malfunction,2.68,1.2,1.29,0.82,0.67,0.52,0.75,1,1,0,1,Severe,1
+ICU_0206,2025-09-20,9,Evening,Central Line Issue,2.86,5.5,0.68,0.94,0.84,0.84,0.85,0,0,0,0,Moderate,0
+ICU_0207,2025-10-01,10,Evening,Handover Communication,2.63,3.6,0.79,0.88,0.78,0.92,0.86,0,0,0,0,Mild,0
+ICU_0208,2025-12-04,12,Morning,Equipment Malfunction,2.11,5.0,0.85,0.77,0.87,0.97,0.89,0,1,0,0,Severe,1
+ICU_0209,2025-06-13,6,Night,Ventilator Event,2.65,2.9,0.93,0.75,1.0,0.83,0.85,0,0,0,0,Sentinel,1
+ICU_0210,2025-02-22,2,Night,Diagnostic Delay,2.35,5.2,1.17,0.93,0.56,0.72,0.85,0,1,0,0,Severe,1
+ICU_0211,2025-02-02,2,Evening,Pressure Injury,2.07,3.9,0.58,1.03,0.92,0.95,0.76,1,0,1,1,Mild,0
+ICU_0212,2025-02-14,2,Night,Pressure Injury,1.76,1.7,0.83,0.73,0.5,0.55,0.7,0,1,0,0,Mild,0
+ICU_0213,2025-12-22,12,Morning,Handover Communication,2.21,4.7,1.19,1.07,0.73,0.47,0.89,0,0,1,0,Severe,1
+ICU_0214,2025-11-27,11,Morning,Handover Communication,2.41,5.1,1.26,1.07,0.53,0.43,0.87,1,0,1,0,Sentinel,1
+ICU_0215,2025-05-16,5,Morning,Central Line Issue,2.6,2.4,0.78,0.81,0.87,0.65,0.78,0,0,1,0,Near Miss,0
+ICU_0216,2025-02-13,2,Evening,Central Line Issue,2.32,4.9,1.03,1.11,0.57,0.76,0.93,0,0,1,1,Severe,1
+ICU_0217,2025-11-26,11,Evening,Sepsis Delay,2.67,4.4,0.53,1.05,0.6,0.73,0.91,0,1,0,0,Severe,1
+ICU_0218,2025-07-15,7,Evening,Fall,3.18,3.0,1.34,1.17,0.77,0.59,0.76,0,0,0,0,Sentinel,1
+ICU_0219,2025-07-06,7,Evening,Equipment Malfunction,2.35,4.8,1.38,0.73,0.99,0.47,0.95,1,0,1,1,Severe,1
+ICU_0220,2025-09-23,9,Evening,Fall,3.42,6.3,1.48,1.18,0.9,0.79,0.87,0,0,0,0,Mild,0
+ICU_0221,2025-06-20,6,Morning,Equipment Malfunction,2.46,2.3,0.93,0.75,0.51,0.41,0.89,0,1,1,0,Severe,1
+ICU_0222,2025-09-30,9,Morning,Ventilator Event,2.29,-0.4,0.75,0.97,0.56,0.5,0.93,0,0,0,0,Severe,1
+ICU_0223,2025-02-14,2,Evening,Fall,2.71,3.7,0.56,0.86,0.8,0.96,0.64,0,0,0,0,Severe,1
+ICU_0224,2025-01-18,1,Night,Handover Communication,2.68,5.8,1.14,1.2,0.66,0.62,0.81,1,1,0,1,Severe,1
+ICU_0225,2025-02-17,2,Morning,Ventilator Event,1.91,5.5,1.21,0.74,0.6,0.41,0.9,0,1,0,0,Sentinel,1
+ICU_0226,2025-02-12,2,Morning,Diagnostic Delay,2.28,2.8,1.17,0.85,0.7,0.55,0.81,0,0,1,1,Mild,0
+ICU_0227,2025-12-21,12,Morning,Equipment Malfunction,2.35,4.8,1.03,1.03,0.5,0.55,0.83,0,1,0,0,Near Miss,0
+ICU_0228,2025-05-13,5,Evening,Equipment Malfunction,2.29,4.9,1.4,1.11,0.7,0.89,0.94,0,1,0,0,Sentinel,1
+ICU_0229,2025-07-23,7,Morning,Pressure Injury,2.26,3.5,0.6,1.14,0.75,0.8,0.76,0,0,0,1,Severe,1
+ICU_0230,2025-10-30,10,Evening,Sepsis Delay,2.74,4.8,1.39,1.02,0.95,0.92,0.71,1,0,0,0,Mild,0
+ICU_0231,2025-10-27,10,Evening,Ventilator Event,1.88,4.9,1.14,1.15,0.74,0.89,0.61,0,0,0,0,Severe,1
+ICU_0232,2025-10-24,10,Morning,Central Line Issue,2.95,2.5,1.32,0.76,0.71,0.52,0.9,1,0,0,0,Sentinel,1
+ICU_0233,2025-10-03,10,Night,Fall,2.17,3.0,0.57,0.97,0.67,0.53,0.97,0,0,0,0,Moderate,0
+ICU_0234,2025-07-01,7,Evening,Sepsis Delay,2.18,3.4,1.02,1.15,0.89,0.49,0.72,0,0,0,0,Severe,1
+ICU_0235,2025-05-23,5,Night,Blood Transfusion Reaction,2.18,3.2,0.96,1.01,0.58,0.41,0.64,1,1,1,0,Mild,0
+ICU_0236,2025-06-10,6,Night,Central Line Issue,2.1,4.7,0.76,1.04,0.94,0.97,0.75,1,0,0,0,Sentinel,1
+ICU_0237,2025-10-24,10,Night,Medication Error,2.8,2.7,1.21,1.19,0.55,0.93,0.67,0,0,0,0,Severe,1
+ICU_0238,2025-06-02,6,Night,Central Line Issue,2.81,2.7,1.27,0.84,0.96,0.44,0.69,0,0,0,0,Near Miss,0
+ICU_0239,2025-12-15,12,Morning,Central Line Issue,2.29,3.6,0.75,1.09,0.63,0.7,0.65,0,0,0,0,Sentinel,1
+ICU_0240,2025-02-01,2,Evening,Fall,3.19,6.1,0.72,0.74,0.85,0.78,0.79,0,0,0,0,Mild,0
+ICU_0241,2025-03-24,3,Evening,Equipment Malfunction,2.42,3.7,1.5,0.89,0.78,0.97,0.84,0,0,0,0,Sentinel,1
+ICU_0242,2025-12-01,12,Evening,Central Line Issue,2.66,5.1,1.36,0.94,0.97,0.48,0.92,0,0,0,0,Near Miss,0
+ICU_0243,2025-07-16,7,Morning,Handover Communication,2.74,2.0,1.28,1.05,0.72,0.96,0.66,0,0,0,0,Severe,1
+ICU_0244,2025-07-16,7,Morning,Pressure Injury,2.12,5.3,1.19,0.8,0.52,0.87,0.93,0,0,0,0,Severe,1
+ICU_0245,2025-12-06,12,Morning,Fall,2.66,3.3,0.83,0.99,0.8,0.95,0.83,1,0,0,0,Severe,1
+ICU_0246,2025-05-24,5,Night,Central Line Issue,2.41,5.6,1.15,0.8,0.86,0.96,0.77,1,0,0,1,Severe,1
+ICU_0247,2025-01-12,1,Morning,Fall,2.75,7.1,0.51,1.15,0.9,0.65,0.64,0,0,0,1,Moderate,0
+ICU_0248,2025-06-07,6,Evening,Pressure Injury,2.65,0.8,0.74,1.12,0.65,0.52,0.67,0,1,1,1,Sentinel,1
+ICU_0249,2025-03-22,3,Night,Medication Error,2.64,6.6,1.2,0.85,0.7,0.94,0.73,0,0,1,1,Severe,1
+ICU_0250,2025-02-08,2,Night,Pressure Injury,2.5,3.4,1.12,0.71,0.68,0.42,0.85,1,1,0,0,Severe,1
+ICU_0251,2025-05-30,5,Morning,Medication Error,1.82,3.6,1.28,0.97,0.67,0.96,0.99,1,1,0,0,Severe,1
+ICU_0252,2025-02-19,2,Evening,Medication Error,2.9,4.3,0.79,0.72,0.51,0.66,0.6,0,0,0,0,Sentinel,1
+ICU_0253,2025-09-20,9,Night,Pressure Injury,3.15,3.5,1.17,1.07,0.8,0.97,0.7,0,1,0,0,Near Miss,0
+ICU_0254,2025-03-21,3,Night,Ventilator Event,2.91,6.3,1.49,1.03,0.81,0.96,0.96,1,0,0,0,Severe,1
+ICU_0255,2025-08-21,8,Morning,Ventilator Event,2.37,5.7,1.2,1.18,0.62,0.69,0.9,0,1,0,1,Moderate,0
+ICU_0256,2025-12-10,12,Evening,Diagnostic Delay,3.04,4.7,0.76,0.77,0.74,0.8,0.84,0,0,1,0,Mild,0
+ICU_0257,2025-09-04,9,Evening,Ventilator Event,2.18,4.3,0.99,0.8,0.86,0.74,0.84,1,1,1,0,Sentinel,1
+ICU_0258,2025-05-16,5,Morning,Ventilator Event,1.84,5.2,0.58,0.91,0.65,0.74,0.69,0,1,0,0,Severe,1
+ICU_0259,2025-12-01,12,Morning,Equipment Malfunction,2.22,2.3,0.67,0.9,0.91,0.91,0.64,1,0,0,0,Mild,0
+ICU_0260,2025-03-12,3,Morning,Medication Error,2.92,1.6,0.73,1.16,0.85,0.53,0.64,1,1,1,1,Severe,1
+ICU_0261,2025-02-18,2,Morning,Equipment Malfunction,3.08,3.1,0.64,0.72,0.95,0.6,0.73,0,1,0,0,Near Miss,0
+ICU_0262,2025-01-16,1,Evening,Ventilator Event,1.48,5.2,0.8,1.06,0.9,0.9,0.91,0,0,0,1,Moderate,0
+ICU_0263,2025-07-17,7,Night,Medication Error,2.11,4.9,1.23,0.84,0.86,0.46,0.77,1,0,1,0,Moderate,0
+ICU_0264,2025-07-11,7,Morning,Blood Transfusion Reaction,2.33,3.8,1.38,1.04,0.89,0.8,0.74,1,0,0,0,Severe,1
+ICU_0265,2025-06-07,6,Evening,Central Line Issue,2.06,4.0,0.66,0.86,0.82,0.76,0.91,0,0,1,0,Severe,1
+ICU_0266,2025-06-09,6,Night,Handover Communication,3.3,4.5,0.54,1.17,0.92,0.96,0.67,0,1,1,0,Moderate,0
+ICU_0267,2025-02-25,2,Night,Equipment Malfunction,2.55,2.3,1.34,1.07,0.63,0.69,0.69,0,1,0,0,Sentinel,1
+ICU_0268,2025-01-26,1,Morning,Diagnostic Delay,3.25,6.7,0.58,1.02,0.55,0.42,0.94,0,1,0,0,Severe,1
+ICU_0269,2025-09-02,9,Morning,Fall,2.41,1.6,1.44,1.01,0.69,0.91,0.69,1,1,1,0,Severe,1
+ICU_0270,2025-05-19,5,Morning,Handover Communication,3.62,3.3,1.09,0.71,0.69,0.71,0.78,0,0,0,0,Severe,1
+ICU_0271,2025-05-20,5,Evening,Pressure Injury,2.73,5.2,1.43,0.81,0.58,0.52,0.86,0,1,0,0,Severe,1
+ICU_0272,2025-08-03,8,Evening,Equipment Malfunction,2.82,2.2,1.18,0.74,0.87,0.59,0.69,0,0,0,0,Severe,1
+ICU_0273,2025-11-23,11,Morning,Sepsis Delay,2.69,3.6,1.11,1.02,0.61,0.62,0.92,1,0,0,1,Severe,1
+ICU_0274,2025-07-30,7,Evening,Handover Communication,2.92,3.2,0.7,1.07,0.56,0.89,0.87,0,0,0,0,Moderate,0
+ICU_0275,2025-03-27,3,Night,Central Line Issue,3.07,6.0,0.88,0.73,0.72,0.49,0.97,0,0,1,1,Mild,0
+ICU_0276,2025-12-01,12,Morning,Diagnostic Delay,2.35,5.0,0.52,0.71,0.76,0.89,0.74,1,1,0,0,Severe,1
+ICU_0277,2025-10-05,10,Evening,Blood Transfusion Reaction,2.86,4.6,1.14,0.7,0.78,0.5,0.92,0,1,0,0,Severe,1
+ICU_0278,2025-04-11,4,Morning,Fall,1.93,0.9,0.8,0.81,0.58,0.64,0.82,0,1,1,0,Sentinel,1
+ICU_0279,2025-08-05,8,Morning,Handover Communication,2.42,5.3,0.82,1.11,0.85,0.47,0.88,1,0,0,0,Severe,1
+ICU_0280,2025-06-09,6,Night,Fall,2.5,5.0,0.99,1.06,0.6,0.62,0.73,0,0,0,0,Near Miss,0
+ICU_0281,2025-11-20,11,Morning,Ventilator Event,2.44,2.1,0.77,1.14,0.72,0.81,0.93,0,1,1,0,Severe,1
+ICU_0282,2025-03-02,3,Evening,Fall,2.87,2.6,0.9,0.83,0.95,0.74,0.8,1,0,0,0,Severe,1
+ICU_0283,2025-03-21,3,Morning,Blood Transfusion Reaction,2.7,4.2,0.54,0.76,0.94,0.67,0.79,0,1,0,0,Moderate,0
+ICU_0284,2025-02-10,2,Morning,Diagnostic Delay,2.47,1.7,0.94,1.06,0.82,0.88,0.91,1,0,0,0,Severe,1
+ICU_0285,2025-06-03,6,Evening,Pressure Injury,1.81,3.0,0.83,1.19,0.7,0.85,0.63,1,0,0,0,Sentinel,1
+ICU_0286,2025-04-26,4,Morning,Blood Transfusion Reaction,1.76,2.9,0.66,0.71,0.63,0.88,0.72,0,1,0,0,Severe,1
+ICU_0287,2025-10-25,10,Evening,Handover Communication,2.59,5.5,1.3,1.2,0.82,0.6,0.72,0,0,0,1,Severe,1
+ICU_0288,2025-02-11,2,Night,Central Line Issue,1.9,4.0,0.99,1.08,0.99,0.8,0.61,0,1,1,1,Severe,1
+ICU_0289,2025-05-18,5,Evening,Medication Error,3.01,3.8,1.01,0.87,0.93,0.75,0.8,1,0,0,0,Near Miss,0
+ICU_0290,2025-12-04,12,Night,Sepsis Delay,3.3,3.8,0.96,0.98,0.64,0.5,0.93,1,0,0,0,Severe,1
+ICU_0291,2025-06-21,6,Morning,Diagnostic Delay,2.19,3.4,0.68,0.91,0.64,0.82,0.74,0,0,0,1,Sentinel,1
+ICU_0292,2025-10-18,10,Morning,Blood Transfusion Reaction,2.03,4.5,0.64,1.15,0.93,0.94,0.8,0,1,1,0,Severe,1
+ICU_0293,2025-08-29,8,Night,Ventilator Event,2.42,3.3,1.38,0.91,0.66,0.58,0.82,0,0,1,1,Severe,1
+ICU_0294,2025-07-25,7,Evening,Diagnostic Delay,1.64,2.8,0.92,0.83,0.6,0.52,0.62,0,0,0,0,Mild,0
+ICU_0295,2025-12-25,12,Evening,Equipment Malfunction,3.09,3.3,1.33,0.71,0.64,0.72,0.65,0,0,0,0,Severe,1
+ICU_0296,2025-12-10,12,Evening,Medication Error,2.11,4.1,0.84,0.76,0.96,0.97,0.82,0,1,0,0,Sentinel,1
+ICU_0297,2025-01-24,1,Morning,Sepsis Delay,1.97,2.3,1.42,1.01,0.7,0.86,0.81,0,0,0,0,Severe,1
+ICU_0298,2025-02-17,2,Morning,Fall,2.22,2.9,0.78,0.71,0.63,0.77,0.9,0,0,0,0,Near Miss,0
+ICU_0299,2025-01-20,1,Night,Sepsis Delay,2.21,4.0,1.44,0.84,0.65,0.68,0.73,0,0,0,0,Mild,0
+ICU_0300,2025-04-09,4,Night,Blood Transfusion Reaction,2.43,3.8,1.01,0.74,0.85,0.61,1.0,0,1,0,0,Severe,1
+ICU_0301,2025-05-28,5,Evening,Fall,2.2,2.1,1.31,1.11,0.86,0.9,0.89,1,0,0,0,Near Miss,0
+ICU_0302,2025-08-24,8,Morning,Fall,2.46,5.6,0.78,1.01,0.68,0.44,0.94,0,0,1,1,Near Miss,0
+ICU_0303,2025-03-31,3,Evening,Handover Communication,2.49,5.9,0.97,0.76,0.56,0.88,0.94,0,1,1,0,Severe,1
+ICU_0304,2025-03-14,3,Evening,Medication Error,1.54,6.1,0.98,1.06,0.5,0.44,0.94,0,1,0,0,Near Miss,0
+ICU_0305,2025-12-11,12,Night,Diagnostic Delay,3.14,2.8,1.16,1.09,0.96,0.56,0.81,1,0,0,0,Sentinel,1
+ICU_0306,2025-01-22,1,Evening,Equipment Malfunction,2.22,4.9,1.24,1.1,0.57,0.7,0.93,1,1,1,0,Severe,1
+ICU_0307,2025-02-11,2,Morning,Pressure Injury,2.33,3.8,0.84,1.09,0.55,0.59,0.94,1,1,1,0,Mild,0
+ICU_0308,2025-03-27,3,Morning,Fall,2.35,2.3,1.05,0.79,0.85,0.87,0.85,0,0,0,1,Severe,1
+ICU_0309,2025-10-12,10,Morning,Fall,2.9,4.2,0.75,1.06,0.89,0.69,0.84,0,0,1,0,Moderate,0
+ICU_0310,2025-04-13,4,Evening,Fall,2.4,3.3,0.58,0.82,0.95,0.42,0.8,1,0,0,0,Severe,1
+ICU_0311,2025-06-14,6,Evening,Equipment Malfunction,1.77,4.3,1.28,0.99,0.6,0.68,0.61,0,1,0,0,Severe,1
+ICU_0312,2025-11-26,11,Evening,Diagnostic Delay,3.05,2.5,0.96,0.9,0.83,0.78,0.95,1,0,0,0,Mild,0
+ICU_0313,2025-10-29,10,Night,Handover Communication,2.51,2.7,1.11,1.02,0.81,0.62,0.61,0,1,0,1,Near Miss,0
+ICU_0314,2025-07-13,7,Night,Blood Transfusion Reaction,3.22,3.6,0.77,0.71,0.55,0.48,0.87,1,1,0,0,Severe,1
+ICU_0315,2025-03-03,3,Evening,Equipment Malfunction,2.18,3.4,0.67,0.72,0.91,0.45,0.96,1,0,1,0,Mild,0
+ICU_0316,2025-05-11,5,Morning,Fall,2.38,3.8,0.62,0.76,0.86,0.98,0.7,0,0,0,0,Mild,0
+ICU_0317,2025-06-08,6,Morning,Medication Error,1.84,2.0,0.76,1.06,0.64,0.71,0.65,0,0,1,1,Severe,1
+ICU_0318,2025-06-28,6,Night,Blood Transfusion Reaction,2.68,5.3,1.04,1.01,0.61,0.91,0.65,0,0,0,0,Mild,0
+ICU_0319,2025-01-02,1,Evening,Pressure Injury,2.61,5.4,1.44,0.84,0.97,0.78,0.6,0,0,0,0,Mild,0
+ICU_0320,2025-08-21,8,Evening,Fall,2.58,2.7,0.6,1.07,0.84,0.51,0.85,1,0,1,0,Severe,1
+ICU_0321,2025-08-24,8,Night,Pressure Injury,1.88,4.6,1.21,0.83,0.93,0.64,0.8,1,0,0,0,Sentinel,1
+ICU_0322,2025-12-14,12,Morning,Ventilator Event,2.82,4.5,0.96,1.03,0.8,0.44,0.85,1,0,0,0,Severe,1
+ICU_0323,2025-12-03,12,Evening,Blood Transfusion Reaction,2.5,3.1,0.61,1.0,0.86,0.87,0.84,0,0,0,0,Near Miss,0
+ICU_0324,2025-01-26,1,Night,Handover Communication,3.26,0.8,1.35,0.83,0.66,0.46,0.87,0,0,0,0,Near Miss,0
+ICU_0325,2025-09-11,9,Morning,Equipment Malfunction,2.69,3.4,1.11,1.16,0.53,1.0,0.76,0,1,0,1,Severe,1
+ICU_0326,2025-02-13,2,Evening,Sepsis Delay,3.33,5.0,0.99,0.96,0.71,0.51,0.99,0,1,1,0,Severe,1
+ICU_0327,2025-06-22,6,Night,Fall,2.67,5.9,0.56,1.15,0.54,0.87,0.62,0,0,0,1,Severe,1
+ICU_0328,2025-10-16,10,Night,Blood Transfusion Reaction,2.74,4.7,0.95,0.98,0.92,0.98,0.61,0,0,0,0,Severe,1
+ICU_0329,2025-03-27,3,Morning,Blood Transfusion Reaction,2.03,5.4,0.95,0.76,0.51,0.84,0.89,0,0,1,1,Sentinel,1
+ICU_0330,2025-05-12,5,Morning,Medication Error,2.78,4.5,0.79,0.91,0.63,0.78,0.85,0,0,0,1,Mild,0
+ICU_0331,2025-12-02,12,Night,Fall,2.77,3.8,0.99,1.16,0.87,0.96,0.9,0,0,1,1,Near Miss,0
+ICU_0332,2025-10-29,10,Night,Sepsis Delay,2.79,2.4,0.74,0.85,0.61,0.7,0.77,0,1,1,0,Near Miss,0
+ICU_0333,2025-12-16,12,Night,Sepsis Delay,2.58,5.2,0.86,1.01,0.67,0.9,0.64,0,0,0,1,Sentinel,1
+ICU_0334,2025-01-07,1,Evening,Central Line Issue,2.43,3.8,1.37,0.84,1.0,0.49,0.73,0,0,1,0,Severe,1
+ICU_0335,2025-02-03,2,Night,Ventilator Event,2.61,5.2,0.99,0.78,0.9,0.6,0.9,0,0,1,0,Severe,1
+ICU_0336,2025-06-22,6,Morning,Diagnostic Delay,3.23,5.9,0.83,0.74,0.8,0.85,0.83,0,0,0,0,Mild,0
+ICU_0337,2025-08-31,8,Night,Blood Transfusion Reaction,3.14,5.2,0.54,0.81,0.81,0.48,0.71,1,0,0,0,Moderate,0
+ICU_0338,2025-04-05,4,Morning,Handover Communication,2.98,7.4,0.51,1.13,0.5,0.87,0.69,0,1,1,1,Severe,1
+ICU_0339,2025-06-07,6,Evening,Ventilator Event,2.41,4.3,1.05,0.71,0.78,0.48,0.92,1,0,0,1,Severe,1
+ICU_0340,2025-03-23,3,Night,Diagnostic Delay,2.32,3.5,0.53,0.99,0.83,0.94,0.62,0,0,0,0,Severe,1
+ICU_0341,2025-08-06,8,Evening,Central Line Issue,2.05,3.5,1.0,0.82,0.71,0.62,0.88,0,0,1,0,Mild,0
+ICU_0342,2025-02-11,2,Evening,Pressure Injury,2.3,6.4,0.74,1.1,0.92,0.72,0.7,1,0,0,0,Sentinel,1
+ICU_0343,2025-03-10,3,Evening,Blood Transfusion Reaction,2.26,5.8,1.42,0.83,0.97,0.66,0.9,1,0,1,1,Sentinel,1
+ICU_0344,2025-10-03,10,Night,Fall,2.71,2.1,1.08,0.91,0.87,0.89,0.89,0,0,0,1,Moderate,0
+ICU_0345,2025-04-04,4,Night,Fall,2.74,5.1,0.65,1.09,0.6,0.46,0.96,0,0,1,0,Severe,1
+ICU_0346,2025-09-17,9,Morning,Blood Transfusion Reaction,2.02,4.5,1.14,0.87,0.57,0.88,0.64,0,0,0,0,Moderate,0
+ICU_0347,2025-12-17,12,Evening,Fall,2.11,5.2,1.26,0.71,0.78,0.59,0.93,1,0,0,0,Severe,1
+ICU_0348,2025-09-28,9,Morning,Central Line Issue,2.47,6.4,0.97,0.74,0.62,0.82,0.63,0,0,0,0,Mild,0
+ICU_0349,2025-07-28,7,Evening,Ventilator Event,2.47,2.8,1.08,1.11,0.58,0.62,0.93,0,1,1,0,Sentinel,1
+ICU_0350,2025-08-13,8,Evening,Ventilator Event,2.0,4.1,1.37,1.17,0.87,0.98,0.97,0,1,0,0,Sentinel,1
+ICU_0351,2025-01-13,1,Night,Pressure Injury,2.41,2.5,1.1,1.07,0.77,0.79,0.65,0,1,0,0,Mild,0
+ICU_0352,2025-09-02,9,Night,Fall,2.1,4.7,0.9,0.95,0.83,0.86,0.89,0,0,0,1,Severe,1
+ICU_0353,2025-10-01,10,Morning,Sepsis Delay,2.93,7.8,1.36,1.13,0.53,0.56,0.97,0,1,0,0,Severe,1
+ICU_0354,2025-01-07,1,Night,Handover Communication,2.09,4.4,0.57,0.75,0.88,0.53,0.7,0,1,1,0,Severe,1
+ICU_0355,2025-04-30,4,Evening,Blood Transfusion Reaction,2.61,2.5,1.01,0.84,0.83,0.87,0.99,0,0,0,0,Mild,0
+ICU_0356,2025-10-06,10,Night,Equipment Malfunction,1.48,3.1,0.79,1.09,0.99,0.76,0.86,0,1,0,0,Severe,1
+ICU_0357,2025-03-08,3,Morning,Diagnostic Delay,2.22,6.6,0.72,0.83,0.81,0.78,0.78,0,1,0,0,Severe,1
+ICU_0358,2025-03-21,3,Evening,Equipment Malfunction,2.69,1.7,1.24,0.79,0.74,0.4,0.62,0,1,0,1,Severe,1
+ICU_0359,2025-02-12,2,Night,Medication Error,2.81,2.2,1.39,0.91,0.51,0.58,0.98,0,0,0,0,Sentinel,1
+ICU_0360,2025-02-25,2,Night,Sepsis Delay,2.62,3.3,1.25,0.99,0.97,0.79,0.99,0,0,0,0,Moderate,0
+ICU_0361,2025-10-19,10,Morning,Sepsis Delay,2.69,4.8,1.45,1.01,0.66,0.46,0.88,0,1,1,1,Sentinel,1
+ICU_0362,2025-06-30,6,Morning,Ventilator Event,1.55,4.7,1.45,1.16,0.69,0.97,0.77,0,0,0,0,Moderate,0
+ICU_0363,2025-09-30,9,Evening,Central Line Issue,2.7,2.1,0.59,0.78,0.91,0.89,0.7,1,0,0,0,Moderate,0
+ICU_0364,2025-04-20,4,Night,Ventilator Event,2.47,4.8,1.36,0.98,0.78,0.54,0.75,1,0,1,0,Severe,1
+ICU_0365,2025-02-23,2,Morning,Sepsis Delay,2.78,2.8,1.14,1.1,0.81,0.57,0.98,1,0,0,0,Moderate,0
+ICU_0366,2025-07-14,7,Evening,Sepsis Delay,2.36,7.2,1.28,0.83,0.91,0.6,0.63,0,0,0,1,Severe,1
+ICU_0367,2025-01-06,1,Night,Ventilator Event,2.25,4.9,1.14,0.83,0.84,0.48,0.85,0,0,0,0,Severe,1
+ICU_0368,2025-08-04,8,Morning,Pressure Injury,2.51,1.9,1.37,0.94,0.89,0.49,0.86,0,0,0,0,Severe,1
+ICU_0369,2025-02-19,2,Evening,Medication Error,2.68,3.1,1.21,0.9,0.74,0.5,0.85,0,0,1,0,Severe,1
+ICU_0370,2025-07-11,7,Morning,Diagnostic Delay,2.55,5.3,0.82,0.9,0.61,0.67,0.8,0,0,1,0,Moderate,0
+ICU_0371,2025-06-20,6,Morning,Handover Communication,2.46,5.0,1.36,0.78,0.77,0.75,0.84,0,0,0,0,Mild,0
+ICU_0372,2025-12-10,12,Night,Medication Error,3.13,4.0,0.67,0.73,0.57,0.74,0.7,0,1,0,1,Near Miss,0
+ICU_0373,2025-06-07,6,Night,Equipment Malfunction,2.46,4.1,1.41,1.18,0.89,0.93,0.75,0,0,0,0,Sentinel,1
+ICU_0374,2025-10-25,10,Morning,Ventilator Event,2.34,3.3,1.0,1.03,0.78,0.46,0.89,0,1,0,0,Severe,1
+ICU_0375,2025-08-30,8,Evening,Equipment Malfunction,1.58,1.7,0.57,0.79,0.91,0.75,0.69,0,0,0,0,Severe,1
+ICU_0376,2025-07-06,7,Night,Diagnostic Delay,2.96,3.8,0.6,1.18,0.57,0.57,0.67,1,1,1,1,Mild,0
+ICU_0377,2025-07-09,7,Morning,Diagnostic Delay,1.73,3.5,1.49,0.71,0.66,0.76,0.74,0,0,0,1,Severe,1
+ICU_0378,2025-12-12,12,Evening,Pressure Injury,1.59,2.0,0.59,1.02,0.92,0.72,0.66,0,0,0,0,Near Miss,0
+ICU_0379,2025-05-15,5,Night,Sepsis Delay,2.37,4.0,1.41,0.82,0.95,0.75,0.99,0,0,0,0,Mild,0
+ICU_0380,2025-03-04,3,Night,Ventilator Event,3.15,4.2,1.09,0.82,0.89,0.42,0.92,1,1,0,0,Severe,1
+ICU_0381,2025-05-30,5,Morning,Fall,3.0,5.8,0.54,0.8,0.74,0.67,0.61,1,0,1,0,Sentinel,1
+ICU_0382,2025-07-23,7,Morning,Ventilator Event,2.57,3.9,0.81,1.02,0.84,0.77,0.72,0,1,0,0,Moderate,0
+ICU_0383,2025-02-21,2,Evening,Handover Communication,3.19,4.9,0.88,0.84,0.64,0.95,0.86,0,1,0,0,Near Miss,0
+ICU_0384,2025-05-28,5,Night,Fall,2.67,6.3,1.13,0.84,0.95,0.7,0.92,0,0,0,0,Near Miss,0
+ICU_0385,2025-10-04,10,Night,Diagnostic Delay,2.09,4.1,0.61,0.93,0.71,0.95,0.65,0,0,1,0,Near Miss,0
+ICU_0386,2025-10-11,10,Morning,Equipment Malfunction,2.72,4.4,0.91,1.14,0.57,0.46,0.69,0,0,1,1,Mild,0
+ICU_0387,2025-09-27,9,Evening,Diagnostic Delay,3.37,4.5,1.27,1.08,0.56,0.92,0.64,1,0,0,1,Severe,1
+ICU_0388,2025-07-12,7,Night,Diagnostic Delay,3.18,5.1,0.87,0.98,0.92,0.5,0.8,0,0,0,0,Mild,0
+ICU_0389,2025-10-23,10,Morning,Diagnostic Delay,2.91,3.6,0.63,1.15,0.63,0.76,0.75,1,0,0,0,Moderate,0
+ICU_0390,2025-04-23,4,Evening,Pressure Injury,1.88,4.0,1.3,0.84,0.98,0.95,0.79,0,0,0,0,Severe,1
+ICU_0391,2025-10-30,10,Evening,Diagnostic Delay,2.47,7.0,1.1,0.76,0.58,0.78,0.62,0,0,0,1,Severe,1
+ICU_0392,2025-11-23,11,Night,Blood Transfusion Reaction,2.69,4.3,1.21,0.98,0.9,0.85,0.84,0,0,0,0,Severe,1
+ICU_0393,2025-11-02,11,Evening,Medication Error,1.87,3.6,0.73,0.95,0.69,0.7,0.71,0,1,0,0,Moderate,0
+ICU_0394,2025-12-11,12,Morning,Medication Error,3.13,6.1,0.71,0.98,0.72,0.98,0.89,0,0,0,0,Near Miss,0
+ICU_0395,2025-07-22,7,Night,Central Line Issue,2.55,3.9,0.98,1.12,0.92,0.41,0.69,0,0,0,1,Severe,1
+ICU_0396,2025-07-29,7,Night,Handover Communication,2.56,4.3,0.64,0.81,0.81,0.57,0.68,0,0,1,1,Severe,1
+ICU_0397,2025-08-03,8,Night,Sepsis Delay,2.49,4.5,1.02,1.03,0.54,0.64,0.96,0,0,1,0,Sentinel,1
+ICU_0398,2025-12-18,12,Morning,Central Line Issue,2.5,5.0,1.39,0.95,0.99,0.87,0.93,0,0,0,1,Sentinel,1
+ICU_0399,2025-01-01,1,Night,Diagnostic Delay,2.65,4.0,1.47,1.01,0.59,0.41,0.8,1,0,1,0,Severe,1
+ICU_0400,2025-04-06,4,Evening,Sepsis Delay,2.08,2.1,1.33,0.74,0.55,0.67,0.77,1,1,1,1,Mild,0
+ICU_0401,2025-11-26,11,Night,Blood Transfusion Reaction,2.53,2.9,0.93,1.2,0.53,0.47,0.66,1,0,0,0,Sentinel,1
+ICU_0402,2025-06-24,6,Evening,Central Line Issue,2.97,2.1,1.47,1.15,0.72,0.44,0.86,0,0,1,1,Severe,1
+ICU_0403,2025-02-09,2,Morning,Diagnostic Delay,2.36,3.9,1.32,0.96,0.72,0.83,0.94,1,0,0,0,Near Miss,0
+ICU_0404,2025-03-02,3,Morning,Ventilator Event,2.42,4.8,0.68,0.87,0.99,0.46,0.98,0,0,0,0,Mild,0
+ICU_0405,2025-05-10,5,Morning,Medication Error,2.67,5.2,0.64,0.87,0.94,0.84,0.73,0,1,0,0,Severe,1
+ICU_0406,2025-06-26,6,Morning,Pressure Injury,2.24,5.2,1.05,1.17,0.72,0.73,0.91,1,1,0,0,Severe,1
+ICU_0407,2025-05-13,5,Night,Sepsis Delay,2.4,1.9,1.42,1.03,0.85,0.98,0.84,1,0,1,1,Severe,1
+ICU_0408,2025-10-22,10,Evening,Sepsis Delay,2.97,5.7,0.68,0.93,0.87,0.61,0.65,0,1,0,0,Near Miss,0
+ICU_0409,2025-05-01,5,Night,Diagnostic Delay,2.49,3.2,1.38,1.11,0.86,0.92,0.9,0,0,0,0,Severe,1
+ICU_0410,2025-07-21,7,Evening,Medication Error,2.49,3.4,0.51,0.98,0.62,0.66,0.68,0,0,0,0,Moderate,0
+ICU_0411,2025-02-08,2,Evening,Blood Transfusion Reaction,2.32,4.7,0.83,0.71,0.65,0.42,0.78,0,1,1,0,Severe,1
+ICU_0412,2025-01-20,1,Morning,Fall,2.47,3.5,1.11,1.16,0.78,0.71,0.62,1,1,0,0,Sentinel,1
+ICU_0413,2025-02-11,2,Evening,Blood Transfusion Reaction,1.96,1.6,0.82,1.14,0.7,0.53,0.91,0,0,1,0,Near Miss,0
+ICU_0414,2025-04-22,4,Night,Fall,2.29,5.6,1.32,1.05,0.56,0.62,0.94,1,1,0,0,Severe,1
+ICU_0415,2025-07-04,7,Morning,Medication Error,2.88,3.5,0.95,0.98,0.69,0.77,0.81,0,0,0,0,Near Miss,0
+ICU_0416,2025-02-25,2,Night,Medication Error,2.19,3.3,0.83,1.06,0.61,0.59,0.97,1,0,1,0,Severe,1
+ICU_0417,2025-04-27,4,Morning,Central Line Issue,2.49,2.7,1.4,0.92,0.84,0.5,0.7,0,0,0,0,Near Miss,0
+ICU_0418,2025-03-01,3,Morning,Fall,1.79,2.9,1.14,1.11,0.68,0.86,0.71,1,0,1,1,Sentinel,1
+ICU_0419,2025-07-22,7,Night,Diagnostic Delay,2.32,3.9,0.64,0.76,0.79,0.78,0.62,0,0,0,1,Mild,0
+ICU_0420,2025-12-12,12,Night,Central Line Issue,3.13,4.5,1.0,0.93,0.82,0.63,0.84,1,0,0,1,Severe,1
+ICU_0421,2025-02-04,2,Morning,Handover Communication,2.74,4.6,0.8,1.08,0.65,0.71,0.8,0,0,0,1,Severe,1
+ICU_0422,2025-02-03,2,Evening,Equipment Malfunction,2.54,3.1,1.0,0.96,0.52,0.62,0.77,0,0,0,0,Mild,0
+ICU_0423,2025-03-21,3,Evening,Handover Communication,2.86,5.4,0.88,0.9,0.86,0.65,0.84,0,0,1,0,Moderate,0
+ICU_0424,2025-12-05,12,Evening,Equipment Malfunction,2.93,5.8,0.58,0.71,0.5,0.48,0.68,0,1,0,0,Severe,1
+ICU_0425,2025-12-27,12,Evening,Diagnostic Delay,2.42,5.7,1.15,1.18,0.72,0.88,0.75,0,0,1,0,Sentinel,1
+ICU_0426,2025-08-27,8,Morning,Medication Error,2.15,5.3,1.39,0.73,0.73,0.99,0.66,0,0,1,0,Moderate,0
+ICU_0427,2025-12-08,12,Evening,Handover Communication,2.38,2.9,0.64,1.04,0.81,0.72,0.99,1,0,1,1,Severe,1
+ICU_0428,2025-03-20,3,Morning,Pressure Injury,2.27,1.2,0.96,1.05,0.61,0.85,0.67,0,0,0,0,Severe,1
+ICU_0429,2025-07-03,7,Evening,Handover Communication,2.88,3.6,0.89,0.97,0.87,0.86,0.95,0,0,0,0,Sentinel,1
+ICU_0430,2025-12-05,12,Morning,Fall,3.44,2.6,1.07,0.95,0.85,0.56,0.63,0,0,1,0,Severe,1
+ICU_0431,2025-01-29,1,Evening,Equipment Malfunction,1.43,5.0,1.03,1.01,0.68,0.58,0.87,0,0,0,0,Near Miss,0
+ICU_0432,2025-12-07,12,Morning,Fall,2.96,3.5,1.26,1.15,0.55,0.5,0.84,0,1,0,0,Severe,1
+ICU_0433,2025-05-10,5,Night,Sepsis Delay,2.12,5.0,0.52,1.13,0.89,0.95,0.72,0,0,0,0,Severe,1
+ICU_0434,2025-05-09,5,Evening,Sepsis Delay,3.21,4.1,1.13,0.71,0.75,0.99,0.69,0,0,1,0,Moderate,0
+ICU_0435,2025-07-05,7,Evening,Pressure Injury,3.05,3.7,0.77,0.9,0.85,0.67,0.98,0,1,0,0,Moderate,0
+ICU_0436,2025-09-25,9,Night,Diagnostic Delay,2.31,5.2,0.5,0.97,0.93,0.95,0.65,0,1,0,1,Sentinel,1
+ICU_0437,2025-11-30,11,Night,Pressure Injury,2.5,5.5,1.48,1.1,0.58,0.72,0.95,0,1,0,0,Severe,1
+ICU_0438,2025-01-20,1,Morning,Sepsis Delay,3.49,4.9,0.57,0.9,0.66,0.95,0.73,0,0,1,0,Severe,1
+ICU_0439,2025-08-31,8,Night,Ventilator Event,2.38,4.7,1.08,0.97,0.55,0.59,0.99,0,0,0,0,Mild,0
+ICU_0440,2025-08-07,8,Evening,Sepsis Delay,2.98,4.5,1.22,1.15,0.67,0.53,0.63,0,0,0,0,Severe,1
+ICU_0441,2025-02-14,2,Night,Handover Communication,2.53,5.8,1.22,0.73,0.92,0.75,0.65,0,0,0,0,Severe,1
+ICU_0442,2025-01-31,1,Morning,Central Line Issue,3.52,3.9,0.84,1.06,0.79,0.9,0.95,0,1,1,0,Sentinel,1
+ICU_0443,2025-03-02,3,Morning,Medication Error,2.57,3.2,1.22,0.77,0.94,0.91,0.66,0,1,1,0,Sentinel,1
+ICU_0444,2025-04-07,4,Night,Pressure Injury,2.63,5.2,1.29,1.1,0.58,0.44,0.85,1,0,0,1,Moderate,0
+ICU_0445,2025-08-20,8,Morning,Ventilator Event,2.01,2.8,0.63,1.13,0.79,0.9,0.82,1,0,0,0,Severe,1
+ICU_0446,2025-07-14,7,Evening,Pressure Injury,2.31,4.8,1.41,0.86,0.71,0.8,0.92,1,0,0,0,Severe,1
+ICU_0447,2025-04-24,4,Morning,Pressure Injury,2.77,4.8,1.01,0.86,0.61,0.98,0.83,1,1,0,0,Severe,1
+ICU_0448,2025-08-25,8,Night,Diagnostic Delay,2.5,4.8,0.88,1.01,1.0,0.92,0.76,0,0,0,0,Severe,1
+ICU_0449,2025-11-02,11,Night,Sepsis Delay,2.46,3.2,1.26,0.7,0.92,0.56,0.75,0,0,0,0,Mild,0
+ICU_0450,2025-05-20,5,Morning,Blood Transfusion Reaction,2.42,5.0,0.98,0.92,0.68,0.45,0.77,0,0,1,1,Severe,1
+ICU_0451,2025-08-30,8,Evening,Fall,1.89,3.9,1.33,0.95,0.62,0.46,0.83,0,0,0,0,Sentinel,1
+ICU_0452,2025-08-17,8,Morning,Handover Communication,3.23,3.7,1.49,0.8,0.87,0.66,0.76,0,0,0,0,Near Miss,0
+ICU_0453,2025-10-20,10,Evening,Fall,2.13,2.0,0.62,0.93,0.79,0.57,0.78,0,0,0,0,Near Miss,0
+ICU_0454,2025-02-26,2,Night,Central Line Issue,3.34,3.5,1.08,1.17,0.76,0.76,0.81,0,0,0,0,Sentinel,1
+ICU_0455,2025-08-17,8,Morning,Medication Error,2.1,3.3,0.52,0.81,0.78,0.42,0.73,0,1,1,0,Severe,1
+ICU_0456,2025-10-15,10,Evening,Ventilator Event,2.53,3.7,1.01,1.15,0.81,0.82,0.95,0,1,0,0,Severe,1
+ICU_0457,2025-08-27,8,Morning,Handover Communication,2.39,5.2,1.08,0.9,0.78,0.96,1.0,0,0,0,0,Mild,0
+ICU_0458,2025-02-11,2,Morning,Fall,2.21,3.9,1.46,0.76,0.51,0.82,0.94,0,1,1,1,Severe,1
+ICU_0459,2025-08-06,8,Night,Handover Communication,3.05,6.6,0.83,1.01,0.91,0.6,0.78,0,0,1,0,Sentinel,1
+ICU_0460,2025-06-25,6,Evening,Sepsis Delay,2.98,4.9,1.14,0.78,0.76,0.66,0.86,1,0,0,0,Near Miss,0
+ICU_0461,2025-07-10,7,Evening,Fall,2.2,4.4,0.64,0.74,0.55,0.71,0.6,0,0,0,0,Sentinel,1
+ICU_0462,2025-02-16,2,Night,Ventilator Event,2.64,6.1,1.22,0.94,0.95,0.89,0.8,1,1,0,1,Sentinel,1
+ICU_0463,2025-09-26,9,Morning,Ventilator Event,2.29,3.5,1.34,1.04,0.63,0.84,0.72,1,1,0,0,Severe,1
+ICU_0464,2025-12-14,12,Night,Handover Communication,2.84,2.7,1.24,1.11,0.92,0.73,0.7,1,0,0,0,Sentinel,1
+ICU_0465,2025-03-31,3,Night,Sepsis Delay,1.87,5.2,1.29,0.76,0.66,0.42,0.78,0,0,0,0,Moderate,0
+ICU_0466,2025-08-05,8,Night,Ventilator Event,2.97,3.1,1.33,0.75,0.83,0.61,0.72,1,0,0,0,Moderate,0
+ICU_0467,2025-03-13,3,Night,Ventilator Event,2.17,5.3,0.81,1.08,0.67,0.64,0.9,1,1,1,0,Severe,1
+ICU_0468,2025-12-18,12,Night,Pressure Injury,2.67,2.8,0.82,1.12,0.81,0.4,0.65,0,1,0,1,Mild,0
+ICU_0469,2025-01-07,1,Morning,Medication Error,2.18,5.1,0.52,1.07,0.84,0.53,0.85,0,0,0,0,Moderate,0
+ICU_0470,2025-09-08,9,Morning,Blood Transfusion Reaction,2.73,4.2,0.6,0.79,0.65,0.86,0.79,0,1,0,0,Severe,1
+ICU_0471,2025-06-01,6,Evening,Fall,1.96,1.7,1.01,0.86,0.84,0.42,0.84,0,0,0,1,Severe,1
+ICU_0472,2025-10-03,10,Night,Diagnostic Delay,2.37,0.7,1.25,0.72,0.61,0.71,0.85,0,1,1,0,Severe,1
+ICU_0473,2025-05-04,5,Morning,Equipment Malfunction,2.3,3.2,1.12,1.06,0.72,0.67,0.76,1,0,1,1,Sentinel,1
+ICU_0474,2025-12-09,12,Night,Pressure Injury,1.91,5.9,0.76,0.83,0.66,0.73,0.83,0,0,1,0,Sentinel,1
+ICU_0475,2025-07-20,7,Morning,Sepsis Delay,3.21,6.5,1.42,0.82,0.52,0.97,0.83,1,1,1,0,Severe,1
+ICU_0476,2025-06-28,6,Morning,Pressure Injury,2.38,3.0,0.89,1.08,0.63,0.97,0.83,0,0,0,0,Sentinel,1
+ICU_0477,2025-10-18,10,Morning,Diagnostic Delay,2.51,2.6,1.08,1.18,0.96,0.96,0.86,0,0,0,0,Severe,1
+ICU_0478,2025-03-31,3,Night,Equipment Malfunction,3.05,5.6,0.55,0.83,0.63,0.87,0.67,0,0,1,0,Mild,0
+ICU_0479,2025-04-06,4,Morning,Pressure Injury,2.29,6.3,0.77,1.15,0.65,0.86,0.9,0,0,0,0,Severe,1
+ICU_0480,2025-12-31,12,Morning,Ventilator Event,1.9,2.4,0.5,0.93,0.59,0.41,0.85,0,0,1,0,Severe,1
+ICU_0481,2025-06-17,6,Night,Equipment Malfunction,2.35,2.9,1.21,1.07,0.98,0.94,0.81,0,1,0,0,Severe,1
+ICU_0482,2025-06-11,6,Evening,Ventilator Event,2.44,4.7,1.05,0.97,0.51,0.42,0.7,0,0,0,0,Mild,0
+ICU_0483,2025-08-05,8,Night,Central Line Issue,2.26,4.3,1.45,0.73,0.75,0.77,0.88,0,0,0,0,Sentinel,1
+ICU_0484,2025-07-14,7,Morning,Equipment Malfunction,2.41,4.9,0.87,0.97,0.62,0.73,0.74,0,0,0,1,Mild,0
+ICU_0485,2025-09-03,9,Evening,Ventilator Event,2.42,4.7,1.13,0.89,0.99,0.94,0.73,0,1,1,0,Severe,1
+ICU_0486,2025-04-09,4,Night,Blood Transfusion Reaction,1.66,3.9,1.16,0.87,0.66,0.94,0.72,0,1,1,1,Sentinel,1
+ICU_0487,2025-07-10,7,Night,Central Line Issue,2.72,7.8,0.76,0.77,0.68,0.59,0.74,0,0,1,0,Severe,1
+ICU_0488,2025-11-30,11,Night,Handover Communication,2.56,6.0,1.47,0.85,0.62,0.43,0.95,1,0,1,0,Severe,1
+ICU_0489,2025-06-19,6,Morning,Ventilator Event,1.75,3.7,0.53,1.01,0.65,0.79,0.64,0,0,0,0,Mild,0
+ICU_0490,2025-02-21,2,Morning,Medication Error,2.05,4.1,1.15,1.07,0.9,0.88,0.95,0,1,0,0,Mild,0
+ICU_0491,2025-09-10,9,Night,Pressure Injury,2.61,4.5,0.75,1.14,0.74,0.48,0.92,0,0,0,1,Sentinel,1
+ICU_0492,2025-01-23,1,Evening,Diagnostic Delay,2.39,6.0,1.21,0.75,0.56,0.64,0.69,0,0,1,0,Severe,1
+ICU_0493,2025-09-01,9,Evening,Handover Communication,2.33,2.8,0.95,0.76,0.56,0.68,0.84,0,0,0,0,Mild,0
+ICU_0494,2025-10-20,10,Morning,Handover Communication,2.38,3.6,1.2,1.16,0.5,0.86,0.6,1,1,0,1,Severe,1
+ICU_0495,2025-04-15,4,Morning,Diagnostic Delay,2.43,4.7,1.27,0.96,0.68,0.63,0.87,0,1,0,1,Sentinel,1
+ICU_0496,2025-08-20,8,Night,Equipment Malfunction,2.57,4.3,0.84,1.08,0.58,0.4,0.88,0,0,0,0,Moderate,0
+ICU_0497,2025-02-05,2,Night,Fall,2.43,2.8,1.32,0.89,0.53,0.41,0.96,1,0,0,0,Severe,1
+ICU_0498,2025-01-19,1,Night,Pressure Injury,2.7,5.6,0.51,1.08,0.72,0.45,0.9,0,1,0,0,Sentinel,1
+ICU_0499,2025-02-20,2,Morning,Medication Error,2.1,5.0,0.82,1.18,0.56,0.89,0.86,0,0,0,1,Severe,1
+ICU_0500,2025-02-02,2,Evening,Diagnostic Delay,2.65,1.8,1.08,0.72,0.84,0.43,0.82,0,0,1,1,Severe,1
