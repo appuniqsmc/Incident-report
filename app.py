@@ -6,195 +6,151 @@ from datetime import datetime
 from openai import OpenAI
 
 # ==========================================================
-# CONFIG
+# PAGE CONFIG
 # ==========================================================
 
-st.set_page_config(layout="wide")
-st.title("ICU Intelligent Root Cause Analysis Platform")
-st.caption("Deterministic Classification + Institutional-Grade AI RCA")
+st.set_page_config(page_title="ICU RCA Intelligence Platform", layout="wide")
 
-# Initialize OpenAI client
+st.markdown("""
+# 🏥 ICU Root Cause Analysis Intelligence Platform
+Structured Deterministic Classification + Advanced AI Institutional Analysis
+""")
+
+st.markdown("---")
+
+# ==========================================================
+# INITIALIZE OPENAI
+# ==========================================================
+
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # ==========================================================
-# INCIDENT INPUT
+# INCIDENT INPUT PANEL
 # ==========================================================
 
-st.header("Incident Information")
+with st.container():
+    st.subheader("📋 Incident Information")
 
-col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
 
-with col1:
-    incident_date = st.date_input("Incident Date", datetime.today())
-    shift = st.selectbox("Shift", ["Morning", "Evening", "Night"])
-    unit = st.selectbox(
-        "ICU Unit",
-        ["Medical ICU", "Surgical ICU", "Cardiac ICU", "Neuro ICU"]
-    )
+    with col1:
+        incident_date = st.date_input("Incident Date", datetime.today())
+        shift = st.selectbox("Shift", ["Morning", "Evening", "Night"])
+        unit = st.selectbox(
+            "ICU Unit",
+            ["Medical ICU", "Surgical ICU", "Cardiac ICU", "Neuro ICU"]
+        )
 
-with col2:
-    severity = st.selectbox(
-        "Severity",
-        ["Near Miss", "Mild", "Moderate", "Severe", "Sentinel"]
-    )
-    incident_type = st.text_input("Incident Type")
-    problem_statement = st.text_input("Problem Statement")
+    with col2:
+        severity = st.selectbox(
+            "Severity Classification",
+            ["Near Miss", "Mild Harm", "Moderate Harm", "Severe Harm", "Sentinel Event"]
+        )
+        incident_type = st.text_input("Incident Type")
+        problem_statement = st.text_input("Problem Statement")
 
-description = st.text_area("Detailed Incident Description")
+    description = st.text_area("Detailed Incident Description", height=150)
 
-st.divider()
+st.markdown("---")
 
 # ==========================================================
-# SMART DOMAIN SCORING ENGINE (DETERMINISTIC)
+# DETERMINISTIC DOMAIN ENGINE
 # ==========================================================
 
 DOMAIN_RULES = {
-    "People / Staff": {
-        "keywords": [
-            "fatigue", "error", "mistake", "calculation",
-            "incorrect", "wrong", "forgot", "inattention",
-            "missed", "dose", "omitted", "insulin",
-            "medication", "drug"
-        ],
-        "weight": 2
-    },
-    "Communication": {
-        "keywords": [
-            "handover", "verbal", "not informed",
-            "miscommunication", "documentation",
-            "unclear", "order"
-        ],
-        "weight": 2
-    },
-    "Policies / Procedures": {
-        "keywords": [
-            "protocol", "guideline", "checklist",
-            "policy", "deviation", "delay"
-        ],
-        "weight": 2
-    },
-    "Equipment / Technology": {
-        "keywords": [
-            "pump", "alarm", "malfunction",
-            "device", "ventilator", "monitor"
-        ],
-        "weight": 2
-    },
-    "Environment": {
-        "keywords": [
-            "busy", "overcrowded", "noise",
-            "high workload", "staff shortage"
-        ],
-        "weight": 1
-    },
-    "Patient Factors": {
-        "keywords": [
-            "complex", "unstable", "non-compliant"
-        ],
-        "weight": 1
-    }
+    "People / Staff": ["missed", "dose", "error", "incorrect", "forgot",
+                       "fatigue", "calculation", "insulin", "medication"],
+    "Communication": ["handover", "verbal", "unclear", "miscommunication",
+                      "not informed", "order"],
+    "Policies / Procedures": ["protocol", "guideline", "checklist",
+                              "policy", "delay", "deviation"],
+    "Equipment / Technology": ["pump", "alarm", "malfunction",
+                               "device", "ventilator", "monitor"],
+    "Environment": ["busy", "overcrowded", "noise",
+                    "workload", "staff shortage"],
+    "Patient Factors": ["unstable", "complex", "non-compliant"]
 }
 
 def classify_domains(text):
     text = text.lower()
-    scores = {}
-
-    for domain, info in DOMAIN_RULES.items():
-        score = 0
-        for word in info["keywords"]:
+    detected = []
+    for domain, keywords in DOMAIN_RULES.items():
+        for word in keywords:
             if re.search(r"\b" + re.escape(word) + r"\b", text):
-                score += info["weight"]
-        scores[domain] = score
-
-    detected = [d for d, s in scores.items() if s > 0]
-
+                detected.append(domain)
+                break
     if not detected:
         detected = ["People / Staff"]
-
-    return detected, scores
+    return detected
 
 # ==========================================================
-# OPENAI INSTITUTIONAL RCA GENERATOR
+# AI GENERATOR
 # ==========================================================
 
-def generate_ai_rca(text, domains):
+def generate_advanced_ai_rca(text, domains):
 
     prompt = f"""
-You are a senior ICU quality improvement consultant.
+You are a senior ICU safety and systems engineering consultant.
 
-Perform a detailed institutional-grade Root Cause Analysis.
+Perform an in-depth institutional-grade Root Cause Analysis.
 
-Incident Description:
+Incident:
 {text}
 
-Detected Contributing Domains:
+Detected Domains:
 {domains}
 
-Generate a structured RCA report with:
+Generate structured report with:
 
-1. Event Summary
-2. Immediate Causes (Active Failures)
-3. Contributing Factors (by each detected domain)
-4. Latent System-Level Causes
-5. Risk Assessment (recurrence + severity implications)
-6. Corrective Actions (Short-Term)
-7. Preventive Strategies (Long-Term)
-8. Suggested Driver Diagram Mapping
-   - Aim
-   - Primary Drivers
-   - Secondary Drivers
-   - Example Change Ideas
+1. Executive Summary
+2. Event Reconstruction
+3. Active Failures
+4. Contributing Factors by Domain
+5. Latent System Failures (Swiss Cheese model)
+6. Barrier Analysis (which safeguards failed)
+7. Risk Matrix Commentary (likelihood × severity)
+8. Corrective Actions (Immediate)
+9. Preventive System Redesign (Long-term)
+10. Detailed Driver Diagram:
+    - Aim
+    - Primary Drivers
+    - Secondary Drivers
+    - Example Interventions
 
 Write in professional healthcare quality language.
-Be analytical and specific.
-Avoid generic statements.
+Be specific, analytical, and non-generic.
 """
 
-    try:
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": "You are a hospital patient safety expert."},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.2,
-        )
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "system", "content": "You are an ICU patient safety expert."},
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.2,
+    )
 
-        return response.choices[0].message.content
-
-    except Exception as e:
-        return f"AI generation failed: {str(e)}"
+    return response.choices[0].message.content
 
 # ==========================================================
-# RCA GENERATION BUTTON
+# GENERATE RCA
 # ==========================================================
 
-if st.button("Generate Comprehensive RCA"):
+if st.button("🚀 Generate Advanced RCA"):
 
-    detected_domains, scores = classify_domains(description)
+    detected_domains = classify_domains(description)
 
-    # ----------------------------------------
-    # DOMAIN SCORING TABLE
-    # ----------------------------------------
-
-    st.subheader("Domain Scoring")
-
-    score_df = pd.DataFrame({
-        "Domain": list(scores.keys()),
-        "Score": list(scores.values())
-    }).sort_values(by="Score", ascending=False)
-
-    st.dataframe(score_df)
-
-    st.subheader("Primary Contributing Domains")
+    st.markdown("## 🔎 Deterministic Domain Classification")
     for d in detected_domains:
-        st.write(f"- {d}")
+        st.markdown(f"- **{d}**")
 
-    # ----------------------------------------
+    st.markdown("---")
+
+    # ======================================================
     # FISHBONE DIAGRAM
-    # ----------------------------------------
+    # ======================================================
 
-    st.subheader("Fishbone Diagram")
+    st.markdown("## 🐟 Fishbone Diagram")
 
     dot = graphviz.Digraph()
     dot.attr(rankdir="LR")
@@ -206,36 +162,41 @@ if st.button("Generate Comprehensive RCA"):
 
     st.graphviz_chart(dot)
 
-    # ----------------------------------------
-    # 5 WHYS STRUCTURED CHAIN
-    # ----------------------------------------
+    st.markdown("---")
 
-    st.subheader("5 Whys Structured Chain")
+    # ======================================================
+    # 5 WHYS
+    # ======================================================
+
+    st.markdown("## 🔍 5 Whys Analysis")
 
     why_df = pd.DataFrame({
         "Level": ["Problem", "Why 1", "Why 2", "Why 3", "Why 4", "Why 5"],
         "Statement": [
             problem_statement,
-            f"Because of issues related to {detected_domains[0]}",
-            "Because system safeguards were insufficient",
-            "Because monitoring and oversight mechanisms failed",
-            "Because organizational learning gaps exist",
-            "Root Cause: System reliability weakness"
+            f"Failure within {detected_domains[0]} domain",
+            "Safeguard weakness",
+            "Monitoring gap",
+            "System design limitation",
+            "Organizational reliability weakness"
         ]
     })
 
     st.table(why_df)
 
-    # ----------------------------------------
-    # AI ENHANCED RCA REPORT
-    # ----------------------------------------
+    st.markdown("---")
 
-    if st.checkbox("Generate Institutional AI RCA Report"):
+    # ======================================================
+    # AI REPORT
+    # ======================================================
 
-        st.subheader("AI-Generated Institutional RCA Report")
+    with st.spinner("Generating Institutional AI RCA Report..."):
+        ai_report = generate_advanced_ai_rca(description, detected_domains)
 
-        ai_output = generate_ai_rca(description, detected_domains)
-        st.write(ai_output)
+    st.markdown("## 📑 Institutional RCA Report")
 
-    st.success("RCA Completed Successfully")
+    with st.expander("View Detailed AI Analysis", expanded=True):
+        st.markdown(ai_report)
+
+    st.success("RCA Analysis Completed Successfully")
 
