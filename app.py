@@ -1,190 +1,179 @@
 import streamlit as st
-import pandas as pd
 import graphviz
+import pandas as pd
 from datetime import datetime
 
-st.set_page_config(page_title="ICU Incident RCA Platform", layout="wide")
+st.set_page_config(layout="wide")
 
-st.title("ICU Incident Reporting & Root Cause Analysis Platform")
-st.caption("Structured ICU safety event reporting with automated RCA, Fishbone and Driver diagrams")
+st.title("ICU Incident Root Cause Analysis Platform")
+st.caption("Fishbone Diagram + Driver Thinking + 5 Whys Technique")
 
-# ================================
-# INCIDENT REPORTING FORM
-# ================================
+# =====================================================
+# INCIDENT BASIC DETAILS
+# =====================================================
 
-st.header("New ICU Incident Report")
+st.header("Incident Details")
 
-with st.form("incident_form"):
+col1, col2 = st.columns(2)
 
-    col1, col2 = st.columns(2)
+with col1:
+    incident_date = st.date_input("Incident Date", datetime.today())
+    shift = st.selectbox("Shift", ["Morning", "Evening", "Night"])
+    unit = st.selectbox("ICU Unit",
+                        ["Medical ICU", "Surgical ICU", "Cardiac ICU", "Neuro ICU"])
 
-    with col1:
-        incident_date = st.date_input("Incident Date", datetime.today())
-        shift = st.selectbox("Shift", ["Morning", "Evening", "Night"])
-        location = st.selectbox("ICU Location", ["Medical ICU", "Surgical ICU", "Cardiac ICU", "Neuro ICU"])
-        severity = st.selectbox("Severity Level",
-                                ["Near Miss", "Mild Harm", "Moderate Harm", "Severe Harm", "Sentinel Event"])
+with col2:
+    severity = st.selectbox("Severity",
+                            ["Near Miss", "Mild", "Moderate", "Severe", "Sentinel"])
+    incident_type = st.text_input("Incident Type (e.g., Medication Error)")
+    problem_statement = st.text_input("Problem Statement (Effect)")
 
-    with col2:
-        incident_type = st.selectbox("Incident Type",
-                                     ["Medication Error", "Airway/Ventilator Event", "Central Line Issue",
-                                      "Sepsis Delay", "Diagnostic Delay", "Equipment Malfunction",
-                                      "Handover Communication", "Fall", "Pressure Injury",
-                                      "Transfusion Reaction"])
+st.divider()
 
-        patient_age = st.number_input("Patient Age", 0, 100, 60)
-        nurse_patient_ratio = st.slider("Nurse-to-Patient Ratio", 1.0, 4.0, 2.5)
-        workload_level = st.slider("Workload Pressure (1=Normal)", 0.5, 2.0, 1.0)
+# =====================================================
+# FISHBONE INPUT SECTIONS
+# =====================================================
 
-    description = st.text_area("Detailed Incident Description")
+st.header("Fishbone Contributing Factors")
 
-    submitted = st.form_submit_button("Generate RCA Analysis")
+categories = [
+    "People / Staff",
+    "Policies / Procedures",
+    "Equipment / Technology",
+    "Environment",
+    "Communication",
+    "Patient Factors"
+]
 
-# ================================
-# RULE-BASED RCA ENGINE
-# ================================
+causes = {}
 
-DOMAIN_RULES = {
-    "Human Factors": ["fatigue", "calculation", "forgot", "inattention", "dose error"],
-    "Communication": ["handover", "not informed", "miscommunication", "unclear"],
-    "Protocol/Process": ["protocol not followed", "no checklist", "guideline absent", "delay"],
-    "Equipment": ["malfunction", "alarm failure", "pump failure", "device"],
-    "Environment": ["busy", "overcrowded", "noise"],
-    "Staffing": ["short staff", "no senior", "inadequate staffing"]
-}
+for cat in categories:
+    st.subheader(cat)
+    text = st.text_area(
+        f"List causes under {cat} (one per line)",
+        height=120,
+        key=cat
+    )
+    causes[cat] = [c.strip() for c in text.split("\n") if c.strip() != ""]
 
-DRIVER_MAP = {
-    "Human Factors": {
-        "Primary": "Staff Competency & Fatigue Management",
-        "Secondary": "Training & Rest Compliance",
-        "Intervention": "Quarterly competency audit + fatigue monitoring"
-    },
-    "Communication": {
-        "Primary": "Structured Handover Reliability",
-        "Secondary": "SBAR & Checklist Use",
-        "Intervention": "Mandatory SBAR digital template"
-    },
-    "Protocol/Process": {
-        "Primary": "Protocol Standardization",
-        "Secondary": "Checklist Enforcement",
-        "Intervention": "Monthly compliance audit"
-    },
-    "Equipment": {
-        "Primary": "Device Reliability",
-        "Secondary": "Preventive Maintenance",
-        "Intervention": "Automated maintenance tracking"
-    },
-    "Environment": {
-        "Primary": "ICU Workflow Optimization",
-        "Secondary": "Noise & Distraction Control",
-        "Intervention": "Environmental safety rounds"
-    },
-    "Staffing": {
-        "Primary": "Adequate Staffing Model",
-        "Secondary": "Skill Mix Optimization",
-        "Intervention": "Dynamic staffing allocation model"
-    }
-}
+st.divider()
 
-def classify_domains(text):
-    text = text.lower()
-    detected = []
-    for domain, keywords in DOMAIN_RULES.items():
-        for word in keywords:
-            if word in text:
-                detected.append(domain)
-                break
-    return list(set(detected))
+# =====================================================
+# GENERATE FISHBONE DIAGRAM
+# =====================================================
 
-# ================================
-# RCA GENERATION
-# ================================
-
-if submitted:
-
-    st.divider()
-    st.header("Root Cause Analysis Output")
-
-    detected_domains = classify_domains(description)
-
-    # Structured RCA Narrative
-    st.subheader("Structured RCA Narrative")
-
-    rca_text = f"""
-    Incident Type: {incident_type}
-
-    The event occurred during the {shift} shift in the {location}.
-    Severity classified as: {severity}.
-
-    Based on the description and contextual parameters (staffing ratio: {nurse_patient_ratio}, workload index: {workload_level}),
-    the following contributing domains were identified:
-    """
-
-    if detected_domains:
-        for d in detected_domains:
-            rca_text += f"\n- {d}"
-    else:
-        rca_text += "\n- No explicit domain detected (requires manual review)."
-
-    st.write(rca_text)
-
-    # ================================
-    # FISHBONE DIAGRAM
-    # ================================
+if st.button("Generate Fishbone Diagram"):
 
     st.subheader("Fishbone Diagram")
 
-    dot = graphviz.Digraph()
-    dot.node("Incident", incident_type)
+    dot = graphviz.Digraph(format="png")
+    dot.attr(rankdir="LR")
+    dot.node("Effect", problem_statement if problem_statement else "ICU Incident")
 
-    for d in detected_domains:
-        dot.node(d)
-        dot.edge(d, "Incident")
+    for cat in categories:
+        if causes[cat]:
+            dot.node(cat)
+            dot.edge(cat, "Effect")
+
+            for cause in causes[cat]:
+                dot.node(f"{cat}_{cause}", cause)
+                dot.edge(f"{cat}_{cause}", cat)
 
     st.graphviz_chart(dot)
 
-    # ================================
-    # DRIVER DIAGRAM
-    # ================================
+# =====================================================
+# DRIVER THINKING (Improvement Logic)
+# =====================================================
 
-    st.subheader("Driver Diagram")
+st.divider()
+st.header("Driver Diagram (Improvement Planning)")
 
-    driver_dot = graphviz.Digraph()
-    driver_dot.node("Aim", "Reduce Similar ICU Incidents")
+aim = st.text_input("Aim Statement (e.g., Reduce Medication Errors by 30%)")
 
-    for d in detected_domains:
-        primary = DRIVER_MAP[d]["Primary"]
-        secondary = DRIVER_MAP[d]["Secondary"]
-        intervention = DRIVER_MAP[d]["Intervention"]
+primary_drivers = st.text_area("Primary Drivers (one per line)")
+secondary_drivers = st.text_area("Secondary Drivers (one per line)")
+interventions = st.text_area("Change Ideas / Interventions (one per line)")
 
-        driver_dot.node(primary)
-        driver_dot.node(secondary)
-        driver_dot.node(intervention)
+if st.button("Generate Driver Diagram"):
 
-        driver_dot.edge("Aim", primary)
-        driver_dot.edge(primary, secondary)
-        driver_dot.edge(secondary, intervention)
+    driver_dot = graphviz.Digraph(format="png")
+    driver_dot.attr(rankdir="LR")
+
+    driver_dot.node("Aim", aim if aim else "Improve ICU Safety")
+
+    primary_list = [x.strip() for x in primary_drivers.split("\n") if x.strip()]
+    secondary_list = [x.strip() for x in secondary_drivers.split("\n") if x.strip()]
+    intervention_list = [x.strip() for x in interventions.split("\n") if x.strip()]
+
+    for p in primary_list:
+        driver_dot.node(p)
+        driver_dot.edge("Aim", p)
+
+        for s in secondary_list:
+            driver_dot.node(s)
+            driver_dot.edge(p, s)
+
+            for i in intervention_list:
+                driver_dot.node(i)
+                driver_dot.edge(s, i)
 
     st.graphviz_chart(driver_dot)
 
-    # ================================
-    # INCIDENT REPORT SUMMARY TABLE
-    # ================================
+# =====================================================
+# 5 WHYS TECHNIQUE
+# =====================================================
 
-    st.subheader("Incident Reporting Summary")
+st.divider()
+st.header("5 Whys Root Cause Exploration")
 
-    summary_df = pd.DataFrame({
-        "Parameter": [
-            "Date", "Shift", "Location", "Incident Type",
-            "Severity", "Patient Age", "Nurse-Patient Ratio", "Workload Index"
-        ],
-        "Value": [
-            incident_date, shift, location, incident_type,
-            severity, patient_age, nurse_patient_ratio, workload_level
+why1 = st.text_input("Why 1?")
+why2 = st.text_input("Why 2?")
+why3 = st.text_input("Why 3?")
+why4 = st.text_input("Why 4?")
+why5 = st.text_input("Why 5?")
+
+if st.button("Generate 5 Whys Analysis"):
+
+    st.subheader("5 Whys Chain")
+
+    why_chain = pd.DataFrame({
+        "Level": ["Problem", "Why 1", "Why 2", "Why 3", "Why 4", "Why 5"],
+        "Statement": [
+            problem_statement,
+            why1,
+            why2,
+            why3,
+            why4,
+            why5
         ]
     })
 
-    st.table(summary_df)
+    st.table(why_chain)
 
-    st.success("RCA Analysis Generated Successfully")
+    st.success("5 Whys Analysis Completed")
+
+# =====================================================
+# SUMMARY EXPORT VIEW
+# =====================================================
+
+st.divider()
+st.header("Incident Summary")
+
+summary_df = pd.DataFrame({
+    "Field": [
+        "Date", "Shift", "Unit",
+        "Severity", "Incident Type", "Problem Statement"
+    ],
+    "Value": [
+        incident_date,
+        shift,
+        unit,
+        severity,
+        incident_type,
+        problem_statement
+    ]
+})
+
+st.table(summary_df)
+
 
