@@ -1,214 +1,90 @@
 import streamlit as st
+import pandas as pd
 import numpy as np
+import pickle
 import matplotlib.pyplot as plt
-from numpy.linalg import norm
-from openai import OpenAI
 
-# -------------------------
-# LOAD BASELINE VECTOR
-# -------------------------
+# Load model
+with open("model.pkl", "rb") as f:
+    model = pickle.load(f)
 
-baseline_vector = np.load("baseline_vector.npy")
+# Load dataset
+df = pd.read_csv("ICU_Synthetic_Incidents_500_Advanced.csv")
 
-# -------------------------
-# LEXICONS
-# -------------------------
+st.title("ICU Safety Digital Twin")
 
-ethical_lexicon = [
-    "prognosis","goals","family","comfort","palliative",
-    "preferences","values","burden","benefit","dnr","dni"
-]
+st.sidebar.header("Intervention Controls")
 
-decision_verbs = [
-    "initiate","start","stop","escalate","withdraw",
-    "intubate","dialyze","commence","discontinue"
-]
+# Sliders
+training = st.sidebar.slider("Training Compliance", 0.4, 1.0, 0.7)
+checklist = st.sidebar.slider("Checklist Compliance", 0.5, 1.0, 0.8)
+workload = st.sidebar.slider("Workload Index", 0.5, 1.5, 1.0)
+staffing = st.sidebar.slider("Staffing Ratio", 1.5, 3.5, 2.5)
 
-conditional_phrases = [
-    "if persists","to discuss","will review",
-    "await","pending","reassess","consider","if worsening"
-]
+# Apply simulation changes
+df_sim = df.copy()
+df_sim["training_compliance"] = training
+df_sim["checklist_compliance"] = checklist
+df_sim["workload_index"] = workload
+df_sim["staffing_ratio"] = staffing
 
-explicit_agents = [
-    "we","icu team","discussed","decided"
-]
+X = df_sim[['staffing_ratio',
+            'avg_experience_years',
+            'workload_index',
+            'bed_occupancy_rate',
+            'checklist_compliance',
+            'training_compliance',
+            'equipment_maintenance_score',
+            'human_factor',
+            'communication_issue',
+            'protocol_issue',
+            'equipment_issue']]
 
-causal_connectors = [
-    "because","therefore","given","hence",
-    "suggests","likely due"
-]
+baseline_X = df[['staffing_ratio',
+                 'avg_experience_years',
+                 'workload_index',
+                 'bed_occupancy_rate',
+                 'checklist_compliance',
+                 'training_compliance',
+                 'equipment_maintenance_score',
+                 'human_factor',
+                 'communication_issue',
+                 'protocol_issue',
+                 'equipment_issue']]
 
-# -------------------------
-# METRIC FUNCTIONS
-# -------------------------
+baseline_prob = model.predict_proba(baseline_X)[:,1].mean()
+new_prob = model.predict_proba(X)[:,1].mean()
 
-def count_occurrences(text, word_list):
-    text_lower = text.lower()
-    return sum(text_lower.count(word) for word in word_list)
+st.subheader("Predicted Severe Incident Rate")
+st.write(f"Baseline: {baseline_prob:.3f}")
+st.write(f"After Intervention: {new_prob:.3f}")
+st.write(f"Reduction: {(baseline_prob - new_prob)*100:.2f}%")
 
-def count_passives(text):
-    return text.lower().count("was ")
+# Monthly projection
+monthly_baseline = df.groupby("month")["severity_binary"].mean()
+monthly_sim = df_sim.copy()
+monthly_sim["predicted"] = model.predict_proba(X)[:,1]
+monthly_projection = monthly_sim.groupby("month")["predicted"].mean()
 
-def compute_metrics(text):
-    word_count = len(text.split())
+fig, ax = plt.subplots()
+ax.plot(monthly_baseline.index, monthly_baseline.values, label="Baseline")
+ax.plot(monthly_projection.index, monthly_projection.values, label="Simulated")
+ax.set_xlabel("Month")
+ax.set_ylabel("Severe Incident Probability")
+ax.legend()
 
-    ethical_count = count_occurrences(text, ethical_lexicon)
-    decision_count = count_occurrences(text, decision_verbs)
-    conditional_count = count_occurrences(text, conditional_phrases)
-    agent_count = count_occurrences(text, explicit_agents)
-    passive_count = count_passives(text)
-    connector_count = count_occurrences(text, causal_connectors)
+st.subheader("Monthly Projection")
+st.pyplot(fig)
 
-    DEI = decision_count / (conditional_count + 1)
-    AVS = agent_count / (passive_count + 1)
-    EIR = ethical_count / (word_count + 1)
-    ICS = connector_count / (word_count + 1)
+# Monte Carlo
+st.subheader("Monte Carlo Simulation (Training Compliance ±5%)")
 
-    return {
-        "DEI": DEI,
-        "AVS": AVS,
-        "EIR": EIR,
-        "ICS": ICS
-    }
+results = []
+for i in range(500):
+    rand_training = np.random.uniform(training-0.05, training+0.05)
+    df_sim["training_compliance"] = rand_training
+    probs = model.predict_proba(df_sim[X.columns])[:,1]
+    results.append(probs.mean())
 
-# -------------------------
-# PROMPTS
-# -------------------------
-
-def get_prompt(note, style):
-
-    if style == "Ethical Integration":
-        return f"""
-        Rewrite this ICU handover note.
-        Preserve clinical facts.
-        Increase ethical integration and goals-of-care framing.
-        Do not add new clinical data.
-
-        NOTE:
-        {note}
-        """
-
-    if style == "Decision Explicitness":
-        return f"""
-        Rewrite this ICU handover note.
-        Preserve clinical facts.
-        Convert deferred language into explicit decisions.
-        Do not add new data.
-
-        NOTE:
-        {note}
-        """
-
-    if style == "Accountability Visibility":
-        return f"""
-        Rewrite this ICU handover note.
-        Preserve clinical facts.
-        Increase explicit identification of responsible agents.
-        Reduce passive constructions.
-        Do not invent actions.
-
-        NOTE:
-        {note}
-        """
-
-    if style == "Interpretive Coherence":
-        return f"""
-        Rewrite this ICU handover note.
-        Preserve clinical facts.
-        Integrate reasoning connectors.
-        Avoid fragmented listing.
-        Do not add new data.
-
-        NOTE:
-        {note}
-        """
-
-# -------------------------
-# OPENAI CLIENT
-# -------------------------
-
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
-
-def generate_twin(note, style):
-    prompt = get_prompt(note, style)
-
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role":"user","content":prompt}]
-    )
-
-    return response.choices[0].message.content
-
-# -------------------------
-# STREAMLIT UI
-# -------------------------
-
-st.title("ICU Documentation Digital Twin")
-
-note = st.text_area("Paste ICU Handover Note")
-
-style = st.selectbox(
-    "Select Structural Axis",
-    [
-        "Ethical Integration",
-        "Decision Explicitness",
-        "Accountability Visibility",
-        "Interpretive Coherence"
-    ]
-)
-
-if st.button("Generate Twin"):
-
-    if note.strip() == "":
-        st.warning("Please paste a note.")
-    else:
-
-        transformed_note = generate_twin(note, style)
-
-        st.subheader("Transformed Note")
-        st.write(transformed_note)
-
-        original_metrics = compute_metrics(note)
-        twin_metrics = compute_metrics(transformed_note)
-
-        original_vector = np.array([
-            original_metrics["DEI"],
-            original_metrics["AVS"],
-            original_metrics["EIR"],
-            original_metrics["ICS"]
-        ])
-
-        twin_vector = np.array([
-            twin_metrics["DEI"],
-            twin_metrics["AVS"],
-            twin_metrics["EIR"],
-            twin_metrics["ICS"]
-        ])
-
-        drift = 1 - (np.dot(baseline_vector, twin_vector) /
-                     (norm(baseline_vector) * norm(twin_vector)))
-
-        st.subheader("Metrics")
-        st.write("Original:", original_metrics)
-        st.write("Twin:", twin_metrics)
-        st.write("Structural Drift:", drift)
-
-        labels = ["DEI","AVS","EIR","ICS"]
-
-        angles = np.linspace(0, 2*np.pi, len(labels), endpoint=False)
-        angles = np.concatenate((angles, [angles[0]]))
-
-        original_vals = list(original_vector) + [original_vector[0]]
-        twin_vals = list(twin_vector) + [twin_vector[0]]
-
-        fig = plt.figure()
-        ax = fig.add_subplot(111, polar=True)
-
-        ax.plot(angles, original_vals, label="Original")
-        ax.plot(angles, twin_vals, label="Twin")
-
-        ax.set_xticks(angles[:-1])
-        ax.set_xticklabels(labels)
-
-        ax.legend()
-        st.pyplot(fig)
+st.write(f"Mean Severe Rate: {np.mean(results):.3f}")
+st.write(f"95% CI: {np.percentile(results,2.5):.3f} - {np.percentile(results,97.5):.3f}")
