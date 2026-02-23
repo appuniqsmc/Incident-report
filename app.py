@@ -8,11 +8,11 @@ from datetime import datetime
 # PAGE CONFIG
 # ==========================================================
 
-st.set_page_config(page_title="ICU RCA Intelligence Platform", layout="wide")
+st.set_page_config(page_title="ICU Safety Intelligence Platform", layout="wide")
 
 st.markdown("""
-# 🏥 ICU Root Cause Analysis Platform
-Deterministic Institutional-Grade RCA Engine (No API Required)
+# 🏥 ICU Safety Intelligence Platform  
+Institutional RCA + Severity Grading + Training Simulation
 """)
 
 st.markdown("---")
@@ -30,11 +30,17 @@ with col1:
     shift = st.selectbox("Shift", ["Morning", "Evening", "Night"])
     unit = st.selectbox("ICU Unit",
                         ["Medical ICU", "Surgical ICU", "Cardiac ICU", "Neuro ICU"])
+    time_to_detection = st.number_input("Time to Detection (minutes)", 0, 1440, 30)
 
 with col2:
-    severity = st.selectbox("Severity Classification",
-                            ["Near Miss", "Mild Harm", "Moderate Harm", "Severe Harm", "Sentinel Event"])
-    incident_type = st.text_input("Incident Type")
+    incident_type = st.selectbox("Incident Type",
+                                 ["Medication Error",
+                                  "Ventilator Event",
+                                  "Central Line Event",
+                                  "Procedure Error",
+                                  "Communication Failure",
+                                  "Equipment Failure",
+                                  "Other"])
     problem_statement = st.text_input("Problem Statement")
 
 description = st.text_area("Detailed Incident Description", height=150)
@@ -42,21 +48,66 @@ description = st.text_area("Detailed Incident Description", height=150)
 st.markdown("---")
 
 # ==========================================================
-# SMART DOMAIN ENGINE (NO AI)
+# MEDICATION ERROR SUBCLASSIFICATION
+# ==========================================================
+
+def classify_medication_error(text):
+    text = text.lower()
+
+    if "wrong dose" in text or "overdose" in text:
+        return "Wrong Dose"
+    if "missed" in text or "omitted" in text:
+        return "Omission Error"
+    if "wrong drug" in text:
+        return "Wrong Drug"
+    if "wrong route" in text:
+        return "Wrong Route"
+    if "wrong time" in text:
+        return "Wrong Time"
+    return "Not Applicable"
+
+# ==========================================================
+# SEVERITY CLASSIFICATION + SENTINEL FLAG
+# ==========================================================
+
+def classify_severity(text, detection_time):
+
+    text = text.lower()
+    sentinel = False
+
+    if any(word in text for word in ["death", "expired"]):
+        sentinel = True
+        return "Death", "ICU Grade 5", "NCC MERP I", sentinel
+
+    if any(word in text for word in ["cardiac arrest", "organ failure", "shock"]):
+        sentinel = True
+        return "Severe Harm", "ICU Grade 4", "NCC MERP H", sentinel
+
+    if any(word in text for word in ["icu transfer", "reintubation", "major bleed"]):
+        return "Severe Harm", "ICU Grade 4", "NCC MERP H", sentinel
+
+    if any(word in text for word in ["prolonged stay", "intervention required"]):
+        return "Moderate Harm", "ICU Grade 3", "NCC MERP F-G", sentinel
+
+    if any(word in text for word in ["temporary", "minor injury", "hypoglycemia"]):
+        return "Mild Harm", "ICU Grade 2", "NCC MERP E", sentinel
+
+    if detection_time < 10:
+        return "Near Miss", "ICU Grade 1", "NCC MERP B-D", sentinel
+
+    return "No Harm", "ICU Grade 1", "NCC MERP A-B", sentinel
+
+# ==========================================================
+# DOMAIN CLASSIFICATION
 # ==========================================================
 
 DOMAIN_RULES = {
-    "People / Staff": ["missed", "dose", "error", "incorrect", "forgot",
-                       "fatigue", "calculation", "insulin", "medication"],
-    "Communication": ["handover", "verbal", "unclear", "miscommunication",
-                      "not informed", "order"],
-    "Policies / Procedures": ["protocol", "guideline", "checklist",
-                              "policy", "delay", "deviation"],
-    "Equipment / Technology": ["pump", "alarm", "malfunction",
-                               "device", "ventilator", "monitor"],
-    "Environment": ["busy", "overcrowded", "noise",
-                    "workload", "staff shortage"],
-    "Patient Factors": ["unstable", "complex", "non-compliant"]
+    "People / Staff": ["missed", "error", "incorrect", "forgot", "fatigue"],
+    "Communication": ["handover", "verbal", "unclear", "not informed"],
+    "Policies / Procedures": ["protocol", "guideline", "checklist", "delay"],
+    "Equipment / Technology": ["pump", "alarm", "malfunction", "ventilator"],
+    "Environment": ["busy", "overcrowded", "noise", "shortage"],
+    "Patient Factors": ["unstable", "complex"]
 }
 
 def classify_domains(text):
@@ -72,103 +123,66 @@ def classify_domains(text):
     return detected
 
 # ==========================================================
-# RCA GENERATOR (PROGRAMMATIC)
+# WHAT-IF TRAINING SIMULATION
 # ==========================================================
 
-def generate_structured_rca(text, domains, severity):
+def simulate_training_effect(severity_grade):
 
-    severity_score = {
-        "Near Miss": 1,
-        "Mild Harm": 2,
-        "Moderate Harm": 3,
-        "Severe Harm": 4,
-        "Sentinel Event": 5
-    }[severity]
+    grade_map = {
+        "ICU Grade 5": 5,
+        "ICU Grade 4": 4,
+        "ICU Grade 3": 3,
+        "ICU Grade 2": 2,
+        "ICU Grade 1": 1
+    }
 
-    recurrence_risk = "Moderate"
-    if severity_score >= 4:
-        recurrence_risk = "High"
-    elif severity_score <= 2:
-        recurrence_risk = "Low"
+    baseline = grade_map[severity_grade]
 
-    report = f"""
-## 1. Executive Summary
-The incident involving **{incident_type}** occurred in the {unit} during the {shift} shift.
-Severity classification: **{severity}**.
-Primary contributing domains identified: {', '.join(domains)}.
+    improved = max(1, baseline - 1)
 
-## 2. Event Reconstruction
-Based on the description, the event represents a deviation from expected safe clinical workflow.
-The failure likely occurred at the interface between clinical task execution and system safeguards.
-
-## 3. Active Failures
-These represent frontline breakdowns in execution:
-- Task-level lapse within {domains[0]} domain
-- Immediate breakdown in procedural reliability
-
-## 4. Contributing Factors by Domain
-"""
-
-    for d in domains:
-        report += f"\n### {d}\n"
-        report += "- Operational vulnerability detected\n"
-        report += "- Safety barrier inadequacy\n"
-
-    report += f"""
-
-## 5. Latent System-Level Failures
-- Insufficient redundancy within workflow
-- Lack of real-time error detection mechanisms
-- Limited feedback loop for safety improvement
-
-## 6. Barrier Analysis (Swiss Cheese Model)
-The following safeguards appear insufficient:
-- Standard operating procedure enforcement
-- Cross-check verification mechanisms
-- Supervisory escalation pathways
-
-## 7. Risk Matrix Commentary
-Estimated recurrence likelihood: **{recurrence_risk}**
-Severity impact: **Level {severity_score} / 5**
-Overall risk exposure: Requires structured intervention.
-
-## 8. Immediate Corrective Actions
-- Incident review with involved staff
-- Immediate workflow clarification
-- Reinforcement of critical checklist steps
-
-## 9. Long-Term Preventive Strategy
-- Structured audit cycle
-- Staff competency reassessment
-- Protocol redesign for redundancy
-- Monitoring dashboard implementation
-
-## 10. Driver Diagram Framework
-**Aim:** Reduce recurrence of similar {incident_type} events  
-**Primary Drivers:** Reliability, Communication Integrity, Workflow Standardization  
-**Secondary Drivers:** Checklist compliance, Training reinforcement, Escalation clarity  
-**Change Ideas:** Digital prompts, double-verification process, monthly safety audit
-"""
-
-    return report
+    return baseline, improved
 
 # ==========================================================
-# RCA GENERATION BUTTON
+# RCA GENERATION
 # ==========================================================
 
-if st.button("🚀 Generate Institutional RCA"):
+if st.button("🚀 Generate Full ICU Analysis"):
 
+    med_subtype = classify_medication_error(description)
+    severity_label, icu_grade, ncc_merp, sentinel_flag = classify_severity(description, time_to_detection)
     detected_domains = classify_domains(description)
 
-    st.markdown("## 🔎 Domain Classification")
+    # ------------------------------------------------------
+    # SEVERITY OUTPUT
+    # ------------------------------------------------------
+
+    st.markdown("## 📊 Severity & Grading Classification")
+
+    severity_df = pd.DataFrame({
+        "Metric": ["Severity", "ICU-Specific Grade", "NCC MERP Category",
+                   "Sentinel Event Flag", "Medication Error Subtype"],
+        "Result": [
+            severity_label,
+            icu_grade,
+            ncc_merp,
+            "YES" if sentinel_flag else "NO",
+            med_subtype
+        ]
+    })
+
+    st.table(severity_df)
+
+    # ------------------------------------------------------
+    # DOMAIN OUTPUT
+    # ------------------------------------------------------
+
+    st.markdown("## 🔎 Contributing Domains")
     for d in detected_domains:
         st.markdown(f"- **{d}**")
 
-    st.markdown("---")
-
-    # ======================================================
-    # FISHBONE DIAGRAM
-    # ======================================================
+    # ------------------------------------------------------
+    # FISHBONE
+    # ------------------------------------------------------
 
     st.markdown("## 🐟 Fishbone Diagram")
 
@@ -182,11 +196,9 @@ if st.button("🚀 Generate Institutional RCA"):
 
     st.graphviz_chart(dot)
 
-    st.markdown("---")
-
-    # ======================================================
+    # ------------------------------------------------------
     # 5 WHYS
-    # ======================================================
+    # ------------------------------------------------------
 
     st.markdown("## 🔍 5 Whys Analysis")
 
@@ -194,9 +206,9 @@ if st.button("🚀 Generate Institutional RCA"):
         "Level": ["Problem", "Why 1", "Why 2", "Why 3", "Why 4", "Why 5"],
         "Statement": [
             problem_statement,
-            f"Failure within {detected_domains[0]} domain",
-            "Safeguard breakdown",
-            "Monitoring weakness",
+            f"Failure in {detected_domains[0]} domain",
+            "Barrier weakness",
+            "Monitoring gap",
             "System design limitation",
             "Organizational reliability gap"
         ]
@@ -204,17 +216,21 @@ if st.button("🚀 Generate Institutional RCA"):
 
     st.table(why_df)
 
-    st.markdown("---")
+    # ------------------------------------------------------
+    # WHAT-IF SIMULATION
+    # ------------------------------------------------------
 
-    # ======================================================
-    # STRUCTURED RCA REPORT
-    # ======================================================
+    st.markdown("## 🎓 What-If Training Simulation")
 
-    st.markdown("## 📑 Institutional RCA Report")
+    baseline_grade, improved_grade = simulate_training_effect(icu_grade)
 
-    report = generate_structured_rca(description, detected_domains, severity)
-    st.markdown(report)
+    st.write(f"Baseline ICU Grade: {baseline_grade}")
+    st.write(f"If detection improved by 50% or checklist enforced:")
+    st.write(f"Projected ICU Grade: {improved_grade}")
 
-    st.success("RCA Completed Successfully")
+    if sentinel_flag:
+        st.error("⚠ Sentinel Event – Immediate institutional review required")
+
+    st.success("Comprehensive ICU Safety Analysis Completed")
 
 
