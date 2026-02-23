@@ -1,12 +1,14 @@
 import streamlit as st
 import graphviz
 import pandas as pd
+import re
+import requests
 from datetime import datetime
 
 st.set_page_config(layout="wide")
 
-st.title("ICU Automated Root Cause Analysis Platform")
-st.caption("Enter incident description → Automatic Fishbone + 5 Whys")
+st.title("ICU Intelligent Root Cause Analysis Platform")
+st.caption("Deterministic Classification + AI-Enhanced RCA")
 
 # =====================================================
 # INCIDENT INPUT
@@ -30,86 +32,132 @@ with col2:
 
 description = st.text_area("Detailed Incident Description")
 
+st.divider()
+
 # =====================================================
-# AUTOMATIC DOMAIN RULE ENGINE
+# SMART DOMAIN SCORING ENGINE
 # =====================================================
 
 DOMAIN_RULES = {
-    "People / Staff": ["fatigue", "inattention", "error", "calculation", "forgot"],
-    "Policies / Procedures": ["protocol", "guideline", "no checklist", "not followed"],
-    "Equipment / Technology": ["malfunction", "pump", "alarm", "device"],
-    "Environment": ["busy", "overcrowded", "noise"],
-    "Communication": ["handover", "miscommunication", "not informed", "unclear"],
-    "Patient Factors": ["non-compliant", "complex", "high risk", "unstable"]
-}
-
-AUTO_CAUSE_LIBRARY = {
-    "People / Staff": [
-        "Inadequate competency validation",
-        "Fatigue-related performance decline",
-        "Calculation error risk"
-    ],
-    "Policies / Procedures": [
-        "Protocol non-adherence",
-        "Checklist gap",
-        "Standard operating procedure deviation"
-    ],
-    "Equipment / Technology": [
-        "Equipment reliability issue",
-        "Alarm management failure",
-        "Maintenance delay"
-    ],
-    "Environment": [
-        "High workload pressure",
-        "Environmental distractions",
-        "ICU overcrowding"
-    ],
-    "Communication": [
-        "Incomplete handover",
-        "Failure of escalation",
-        "Documentation gap"
-    ],
-    "Patient Factors": [
-        "High acuity",
-        "Complex comorbidity",
-        "Unpredictable clinical course"
-    ]
+    "People / Staff": {
+        "keywords": ["fatigue", "error", "mistake", "calculation",
+                     "incorrect", "wrong", "forgot", "inattention"],
+        "weight": 2
+    },
+    "Communication": {
+        "keywords": ["handover", "verbal", "not informed",
+                     "miscommunication", "documentation", "unclear"],
+        "weight": 2
+    },
+    "Policies / Procedures": {
+        "keywords": ["protocol", "guideline", "checklist",
+                     "policy", "deviation", "delay"],
+        "weight": 2
+    },
+    "Equipment / Technology": {
+        "keywords": ["pump", "alarm", "malfunction",
+                     "device", "ventilator", "monitor"],
+        "weight": 2
+    },
+    "Environment": {
+        "keywords": ["busy", "overcrowded", "noise",
+                     "high workload", "staff shortage"],
+        "weight": 1
+    },
+    "Patient Factors": {
+        "keywords": ["complex", "unstable", "non-compliant",
+                     "multiple comorbidities"],
+        "weight": 1
+    }
 }
 
 def classify_domains(text):
     text = text.lower()
-    detected = []
-    for domain, keywords in DOMAIN_RULES.items():
-        for word in keywords:
-            if word in text:
-                detected.append(domain)
-                break
-    return detected
+    scores = {}
+
+    for domain, info in DOMAIN_RULES.items():
+        score = 0
+        for word in info["keywords"]:
+            if re.search(r"\b" + re.escape(word) + r"\b", text):
+                score += info["weight"]
+        scores[domain] = score
+
+    detected = [d for d, s in scores.items() if s > 0]
+
+    if not detected:
+        detected = ["People / Staff"]
+
+    return detected, scores
 
 # =====================================================
-# GENERATE ANALYSIS
+# HUGGING FACE LLM FUNCTION
 # =====================================================
 
-if st.button("Generate Automated RCA"):
+def generate_llm_summary(text, domains):
 
-    detected_domains = classify_domains(description)
+    prompt = f"""
+    Perform a structured ICU Root Cause Analysis.
 
-    st.divider()
-    st.header("Structured RCA Summary")
+    Incident Description:
+    {text}
 
-    if detected_domains:
-        for d in detected_domains:
-            st.write(f"- Contributing Domain Identified: **{d}**")
-    else:
-        st.write("No explicit domain keywords detected — manual review advised.")
+    Identified Contributing Domains:
+    {domains}
+
+    Provide:
+    1. Concise RCA narrative
+    2. Latent system-level root cause
+    3. Recommended improvement strategies
+    """
+
+    headers = {
+        "Authorization": f"Bearer {st.secrets['HF_API_KEY']}"
+    }
+
+    API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-large"
+
+    response = requests.post(
+        API_URL,
+        headers=headers,
+        json={"inputs": prompt}
+    )
+
+    result = response.json()
+
+    if isinstance(result, list):
+        return result[0]["generated_text"]
+
+    return "AI generation failed."
+
+# =====================================================
+# RCA GENERATION
+# =====================================================
+
+if st.button("Generate Intelligent RCA"):
+
+    detected_domains, scores = classify_domains(description)
+
+    st.subheader("Domain Scoring")
+
+    score_df = pd.DataFrame({
+        "Domain": list(scores.keys()),
+        "Score": list(scores.values())
+    }).sort_values(by="Score", ascending=False)
+
+    st.dataframe(score_df)
+
+    st.subheader("Primary Contributing Domains")
+
+    for d in detected_domains:
+        st.write(f"- {d}")
 
     # =====================================================
-    # AUTO FISHBONE
+    # FISHBONE
     # =====================================================
 
-    st.subheader("Auto-Generated Fishbone Diagram")
+    st.subheader("Fishbone Diagram")
 
-    dot = graphviz.Digraph(format="png")
+    dot = graphviz.Digraph()
     dot.attr(rankdir="LR")
     dot.node("Effect", problem_statement if problem_statement else "ICU Incident")
 
@@ -117,59 +165,37 @@ if st.button("Generate Automated RCA"):
         dot.node(d)
         dot.edge(d, "Effect")
 
-        for cause in AUTO_CAUSE_LIBRARY[d]:
-            dot.node(f"{d}_{cause}", cause)
-            dot.edge(f"{d}_{cause}", d)
-
     st.graphviz_chart(dot)
 
     # =====================================================
-    # AUTO 5 WHYS
+    # 5 WHYS AUTO STRUCTURE
     # =====================================================
 
-    st.subheader("5 Whys (Auto-Structured)")
-
-    why_chain = []
-
-    why_chain.append(problem_statement)
-
-    if detected_domains:
-        why_chain.append(f"Because of issues related to {detected_domains[0]}")
-        why_chain.append("Because system safeguards were inadequate")
-        why_chain.append("Because monitoring/audit process failed")
-        why_chain.append("Because of latent organizational gap")
-        why_chain.append("Root cause: System reliability weakness")
-    else:
-        why_chain.append("Why requires manual exploration")
-        why_chain += ["", "", "", ""]
+    st.subheader("5 Whys Structured Chain")
 
     why_df = pd.DataFrame({
         "Level": ["Problem", "Why 1", "Why 2", "Why 3", "Why 4", "Why 5"],
-        "Statement": why_chain
+        "Statement": [
+            problem_statement,
+            f"Because of issues related to {detected_domains[0]}",
+            "Because system safeguards were inadequate",
+            "Because monitoring/audit process failed",
+            "Because latent organizational weakness exists",
+            "Root Cause: System reliability failure"
+        ]
     })
 
     st.table(why_df)
 
     # =====================================================
-    # INCIDENT SUMMARY
+    # OPTIONAL AI ENHANCEMENT
     # =====================================================
 
-    st.subheader("Incident Summary")
+    if st.checkbox("Enhance with AI Narrative"):
 
-    summary_df = pd.DataFrame({
-        "Field": [
-            "Date", "Shift", "Unit",
-            "Severity", "Incident Type"
-        ],
-        "Value": [
-            incident_date,
-            shift,
-            unit,
-            severity,
-            incident_type
-        ]
-    })
+        st.subheader("AI-Enhanced RCA Narrative")
 
-    st.table(summary_df)
+        llm_output = generate_llm_summary(description, detected_domains)
+        st.write(llm_output)
 
-    st.success("Automated RCA Completed")
+    st.success("RCA Completed")
