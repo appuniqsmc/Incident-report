@@ -3,7 +3,6 @@ import graphviz
 import pandas as pd
 import re
 from datetime import datetime
-from openai import OpenAI
 
 # ==========================================================
 # PAGE CONFIG
@@ -12,49 +11,38 @@ from openai import OpenAI
 st.set_page_config(page_title="ICU RCA Intelligence Platform", layout="wide")
 
 st.markdown("""
-# 🏥 ICU Root Cause Analysis Intelligence Platform
-Structured Deterministic Classification + Advanced AI Institutional Analysis
+# 🏥 ICU Root Cause Analysis Platform
+Deterministic Institutional-Grade RCA Engine (No API Required)
 """)
 
 st.markdown("---")
 
 # ==========================================================
-# INITIALIZE OPENAI
+# INCIDENT INPUT
 # ==========================================================
 
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+st.subheader("📋 Incident Information")
 
-# ==========================================================
-# INCIDENT INPUT PANEL
-# ==========================================================
+col1, col2 = st.columns(2)
 
-with st.container():
-    st.subheader("📋 Incident Information")
+with col1:
+    incident_date = st.date_input("Incident Date", datetime.today())
+    shift = st.selectbox("Shift", ["Morning", "Evening", "Night"])
+    unit = st.selectbox("ICU Unit",
+                        ["Medical ICU", "Surgical ICU", "Cardiac ICU", "Neuro ICU"])
 
-    col1, col2 = st.columns(2)
+with col2:
+    severity = st.selectbox("Severity Classification",
+                            ["Near Miss", "Mild Harm", "Moderate Harm", "Severe Harm", "Sentinel Event"])
+    incident_type = st.text_input("Incident Type")
+    problem_statement = st.text_input("Problem Statement")
 
-    with col1:
-        incident_date = st.date_input("Incident Date", datetime.today())
-        shift = st.selectbox("Shift", ["Morning", "Evening", "Night"])
-        unit = st.selectbox(
-            "ICU Unit",
-            ["Medical ICU", "Surgical ICU", "Cardiac ICU", "Neuro ICU"]
-        )
-
-    with col2:
-        severity = st.selectbox(
-            "Severity Classification",
-            ["Near Miss", "Mild Harm", "Moderate Harm", "Severe Harm", "Sentinel Event"]
-        )
-        incident_type = st.text_input("Incident Type")
-        problem_statement = st.text_input("Problem Statement")
-
-    description = st.text_area("Detailed Incident Description", height=150)
+description = st.text_area("Detailed Incident Description", height=150)
 
 st.markdown("---")
 
 # ==========================================================
-# DETERMINISTIC DOMAIN ENGINE
+# SMART DOMAIN ENGINE (NO AI)
 # ==========================================================
 
 DOMAIN_RULES = {
@@ -84,63 +72,95 @@ def classify_domains(text):
     return detected
 
 # ==========================================================
-# AI GENERATOR
+# RCA GENERATOR (PROGRAMMATIC)
 # ==========================================================
 
-def generate_advanced_ai_rca(text, domains):
+def generate_structured_rca(text, domains, severity):
 
-    prompt = f"""
-You are a senior ICU safety and systems engineering consultant.
+    severity_score = {
+        "Near Miss": 1,
+        "Mild Harm": 2,
+        "Moderate Harm": 3,
+        "Severe Harm": 4,
+        "Sentinel Event": 5
+    }[severity]
 
-Perform an in-depth institutional-grade Root Cause Analysis.
+    recurrence_risk = "Moderate"
+    if severity_score >= 4:
+        recurrence_risk = "High"
+    elif severity_score <= 2:
+        recurrence_risk = "Low"
 
-Incident:
-{text}
+    report = f"""
+## 1. Executive Summary
+The incident involving **{incident_type}** occurred in the {unit} during the {shift} shift.
+Severity classification: **{severity}**.
+Primary contributing domains identified: {', '.join(domains)}.
 
-Detected Domains:
-{domains}
+## 2. Event Reconstruction
+Based on the description, the event represents a deviation from expected safe clinical workflow.
+The failure likely occurred at the interface between clinical task execution and system safeguards.
 
-Generate structured report with:
+## 3. Active Failures
+These represent frontline breakdowns in execution:
+- Task-level lapse within {domains[0]} domain
+- Immediate breakdown in procedural reliability
 
-1. Executive Summary
-2. Event Reconstruction
-3. Active Failures
-4. Contributing Factors by Domain
-5. Latent System Failures (Swiss Cheese model)
-6. Barrier Analysis (which safeguards failed)
-7. Risk Matrix Commentary (likelihood × severity)
-8. Corrective Actions (Immediate)
-9. Preventive System Redesign (Long-term)
-10. Detailed Driver Diagram:
-    - Aim
-    - Primary Drivers
-    - Secondary Drivers
-    - Example Interventions
-
-Write in professional healthcare quality language.
-Be specific, analytical, and non-generic.
+## 4. Contributing Factors by Domain
 """
 
-    response = client.chat.completions.create(
-        model="gpt-4o",
-        messages=[
-            {"role": "system", "content": "You are an ICU patient safety expert."},
-            {"role": "user", "content": prompt}
-        ],
-        temperature=0.2,
-    )
+    for d in domains:
+        report += f"\n### {d}\n"
+        report += "- Operational vulnerability detected\n"
+        report += "- Safety barrier inadequacy\n"
 
-    return response.choices[0].message.content
+    report += f"""
+
+## 5. Latent System-Level Failures
+- Insufficient redundancy within workflow
+- Lack of real-time error detection mechanisms
+- Limited feedback loop for safety improvement
+
+## 6. Barrier Analysis (Swiss Cheese Model)
+The following safeguards appear insufficient:
+- Standard operating procedure enforcement
+- Cross-check verification mechanisms
+- Supervisory escalation pathways
+
+## 7. Risk Matrix Commentary
+Estimated recurrence likelihood: **{recurrence_risk}**
+Severity impact: **Level {severity_score} / 5**
+Overall risk exposure: Requires structured intervention.
+
+## 8. Immediate Corrective Actions
+- Incident review with involved staff
+- Immediate workflow clarification
+- Reinforcement of critical checklist steps
+
+## 9. Long-Term Preventive Strategy
+- Structured audit cycle
+- Staff competency reassessment
+- Protocol redesign for redundancy
+- Monitoring dashboard implementation
+
+## 10. Driver Diagram Framework
+**Aim:** Reduce recurrence of similar {incident_type} events  
+**Primary Drivers:** Reliability, Communication Integrity, Workflow Standardization  
+**Secondary Drivers:** Checklist compliance, Training reinforcement, Escalation clarity  
+**Change Ideas:** Digital prompts, double-verification process, monthly safety audit
+"""
+
+    return report
 
 # ==========================================================
-# GENERATE RCA
+# RCA GENERATION BUTTON
 # ==========================================================
 
-if st.button("🚀 Generate Advanced RCA"):
+if st.button("🚀 Generate Institutional RCA"):
 
     detected_domains = classify_domains(description)
 
-    st.markdown("## 🔎 Deterministic Domain Classification")
+    st.markdown("## 🔎 Domain Classification")
     for d in detected_domains:
         st.markdown(f"- **{d}**")
 
@@ -175,10 +195,10 @@ if st.button("🚀 Generate Advanced RCA"):
         "Statement": [
             problem_statement,
             f"Failure within {detected_domains[0]} domain",
-            "Safeguard weakness",
-            "Monitoring gap",
+            "Safeguard breakdown",
+            "Monitoring weakness",
             "System design limitation",
-            "Organizational reliability weakness"
+            "Organizational reliability gap"
         ]
     })
 
@@ -187,16 +207,14 @@ if st.button("🚀 Generate Advanced RCA"):
     st.markdown("---")
 
     # ======================================================
-    # AI REPORT
+    # STRUCTURED RCA REPORT
     # ======================================================
-
-    with st.spinner("Generating Institutional AI RCA Report..."):
-        ai_report = generate_advanced_ai_rca(description, detected_domains)
 
     st.markdown("## 📑 Institutional RCA Report")
 
-    with st.expander("View Detailed AI Analysis", expanded=True):
-        st.markdown(ai_report)
+    report = generate_structured_rca(description, detected_domains, severity)
+    st.markdown(report)
 
-    st.success("RCA Analysis Completed Successfully")
+    st.success("RCA Completed Successfully")
+
 
